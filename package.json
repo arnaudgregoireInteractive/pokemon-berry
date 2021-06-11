@@ -1,5 +1,5 @@
 {
-  "name": "colyseus-phaser-vue",
+  "name": "pokemon-berry",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,11 +16,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@colyseus/command": "^0.1.7",
+    "@colyseus/social": "^0.11.7",
     "colyseus": "^0.14.15",
     "colyseus.js": "^0.14.12",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
     "helmet": "^4.6.0",
     "phaser": "^3.55.2",
+    "phaser3-rex-plugins": "^1.1.52",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0"

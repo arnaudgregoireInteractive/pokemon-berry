@@ -20,9 +20,9 @@ app.get('/', (req, res) => {
 });
 
 // Colyseus room
-const Room = require('./room/colyseus-room');
+const GameRoom = require('./room/game-room');
 
-gameServer.define('room', Room);
+gameServer.define('room', GameRoom);
 
 // Start
 gameServer.listen(port).then(() => {
