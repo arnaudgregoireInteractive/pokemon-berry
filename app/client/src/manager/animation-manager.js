@@ -31,6 +31,7 @@ export default class AnimationManager {
             key: `hero/1/${orientation}`,
             frames: this.scene.anims.generateFrameNames('hero', {frames:[0,1,2], prefix: `0/${orientation}/`}),
             frameRate: 6,
+            yoyo: true,
             repeat:-1
         });
     });

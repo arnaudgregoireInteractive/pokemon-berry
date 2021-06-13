@@ -17,4 +17,9 @@ const STATUS = Object.freeze({
     SURFING: "SURFING"
 });
 
-module.exports = {ZONES, TILESET_PIXEL, ORIENTATION, STATUS};
+const KEY_STATUS = Object.freeze({
+    DOWN: "DOWN",
+    UP: "UP"
+});
+
+module.exports = {ZONES, TILESET_PIXEL, ORIENTATION, STATUS, KEY_STATUS};

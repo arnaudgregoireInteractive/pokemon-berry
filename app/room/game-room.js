@@ -3,7 +3,7 @@ const command = require("@colyseus/command");
 const tiledData = require('../shared/PALLET_TOWN');
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
-const {OnJoinCommand, OnLeaveCommand, OnMoveCommand, OnUpdateCommand, OnIdleCommand} = require("./command/game-command");
+const {OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand} = require("./command/game-command");
 
 class GameRoom extends colyseus.Room {
 
@@ -13,15 +13,8 @@ class GameRoom extends colyseus.Room {
     this.spawnPoint = this.data.layers[2].objects.find(obj=>{return obj.properties[0].value == "SPAWN_POINT"});
     this.setState(new GameState(ZONES.PALLET_TOWN));
 
-    this.onMessage("move",(client, message) =>{
-      this.dispatcher.dispatch(new OnMoveCommand(), {
-        client,
-        message
-      });
-    });
-
-    this.onMessage("idle",(client, message) =>{
-      this.dispatcher.dispatch(new OnIdleCommand(), {
+    this.onMessage("cursor",(client, message) =>{
+      this.dispatcher.dispatch(new OnCursorCommand(), {
         client,
         message
       });

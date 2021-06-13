@@ -10,7 +10,7 @@ export default class Player extends GameObjects.Container {
     this.status = player.status;
     this.orientation = player.orientation;
     this.moveManager = scene.plugins.get('rexMoveTo').add(this, {
-      speed: 64,
+      speed: 58,
       rotateToTarget: false
     });
     this.sprite = new GameObjects.Sprite(scene,0,0,'hero','0/0/1');

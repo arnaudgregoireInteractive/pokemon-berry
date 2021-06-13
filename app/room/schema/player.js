@@ -1,5 +1,7 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
+const {KEY_STATUS} = require('../../shared/enum');
+const { layers } = require('../../shared/PALLET_TOWN');
 
 class Player extends Schema {
   constructor(id, x, y, orientation, status) {
@@ -12,6 +14,12 @@ class Player extends Schema {
       status:status
     });
     this.moveCooldown = 0;
+    this.cursors = {
+      LEFT: KEY_STATUS.UP,
+      UP: KEY_STATUS.UP,
+      RIGHT: KEY_STATUS.UP,
+      DOWN: KEY_STATUS.UP
+    };
   }
 }
 

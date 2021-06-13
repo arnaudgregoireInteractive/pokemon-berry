@@ -1,6 +1,6 @@
 import {Scene, GameObjects} from 'phaser';
 import PlayerManager from '../manager/player-manager';
-import {ORIENTATION} from '../../../shared/enum';
+import {ORIENTATION, KEY_STATUS} from '../../../shared/enum';
 import AnimationManager from '../manager/animation-manager';
 
 export default class GameScene extends Scene {
@@ -82,13 +82,16 @@ export default class GameScene extends Scene {
     const tilesetWorld = this.map.addTilesetImage('tileset-world', 'tileset-world', 16, 16, 1, 1);
     const tilesetBuilding = this.map.addTilesetImage('tileset-building', 'tileset-building', 16, 16, 1, 1);
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.disableInput = false;
 
     this.map.createLayer('world', tilesetWorld, 0, 0);
     this.map.createLayer('buildings', tilesetBuilding, 0, 0);
 
     this.animationManager = new AnimationManager(this);
     this.playerManager = new PlayerManager(this);
+    this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+    this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+    this.downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     this.initialize();
   }
 
@@ -98,29 +101,36 @@ export default class GameScene extends Scene {
     });
   }
 
-  init(state){
-    this.zone = state.zone;
-    this.players = state.players;
+  init(room){
+    this.zone = room.state.zone;
+    this.players = room.state.players;
+    this.sessionId = room.sessionId;
   }
 
   update(){
-    if(!this.disableInput){
-      if (this.cursors.left.isDown)
-      {
-        document.getElementById('game').dispatchEvent(new CustomEvent("move", {detail: {direction: ORIENTATION.LEFT}}));
-      }
-      else if (this.cursors.right.isDown)
-      {
-        document.getElementById('game').dispatchEvent(new CustomEvent("move", {detail: {direction: ORIENTATION.RIGHT}}));
-      }
-      else if (this.cursors.up.isDown)
-      {
-        document.getElementById('game').dispatchEvent(new CustomEvent("move", {detail: {direction: ORIENTATION.UP}}));
-      }
-      else if (this.cursors.down.isDown)
-      {
-        document.getElementById('game').dispatchEvent(new CustomEvent("move", {detail: {direction: ORIENTATION.DOWN}}));
-      }
+    if (Phaser.Input.Keyboard.JustDown(this.leftKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.LEFT, input: KEY_STATUS.DOWN}}));
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.rightKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.RIGHT, input: KEY_STATUS.DOWN}}));
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.upKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.UP, input: KEY_STATUS.DOWN}}));
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.downKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.DOWN, input: KEY_STATUS.DOWN}}));
+    }
+    if (Phaser.Input.Keyboard.JustUp(this.leftKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.LEFT, input: KEY_STATUS.UP}}));
+    }
+    if (Phaser.Input.Keyboard.JustUp(this.rightKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.RIGHT, input: KEY_STATUS.UP}}));
+    }
+    if (Phaser.Input.Keyboard.JustUp(this.upKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.UP, input: KEY_STATUS.UP}}));
+    }
+    if (Phaser.Input.Keyboard.JustUp(this.downKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.DOWN, input: KEY_STATUS.UP}}));
     }
   }
 }

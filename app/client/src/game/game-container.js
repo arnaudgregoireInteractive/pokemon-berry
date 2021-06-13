@@ -33,7 +33,7 @@ export default class GameContainer {
                 }]
               }
             });
-            this.game.scene.start('game-scene', state);
+            this.game.scene.start('game-scene', room);
           });
         });
     } catch (e) {
@@ -80,6 +80,6 @@ export default class GameContainer {
   }
 
   handlePlayerInput(message){
-    this.room.send('move', message);
+    this.room.send('cursor', message);
   }
 }
