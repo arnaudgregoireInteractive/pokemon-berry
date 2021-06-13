@@ -1,6 +1,7 @@
 import {Scene, GameObjects} from 'phaser';
 import PlayerManager from '../manager/player-manager';
 import {ORIENTATION} from '../../../shared/enum';
+import AnimationManager from '../manager/animation-manager';
 
 export default class GameScene extends Scene {
   constructor() {
@@ -86,6 +87,7 @@ export default class GameScene extends Scene {
     this.map.createLayer('world', tilesetWorld, 0, 0);
     this.map.createLayer('buildings', tilesetBuilding, 0, 0);
 
+    this.animationManager = new AnimationManager(this);
     this.playerManager = new PlayerManager(this);
     this.initialize();
   }

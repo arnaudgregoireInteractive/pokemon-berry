@@ -11,10 +11,12 @@ export default class App extends React.Component {
 
   componentDidMount(){
     document.getElementById('game').addEventListener('move', (this.handlePlayerInput.bind(this)));
+    document.getElementById('game').addEventListener('idle', (this.handlePlayerInput.bind(this)));
   }
 
   componentWillUnmount(){
     document.getElementById('game').removeEventListener('move', this.handlePlayerInput.bind(this));
+    document.getElementById('game').addEventListener('idle', (this.handlePlayerInput.bind(this)));
   }
 
   handlePlayerInput(e){

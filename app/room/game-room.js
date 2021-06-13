@@ -1,9 +1,9 @@
 const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const tiledData = require('../shared/PALLET_TOWN');
-const {TILESET_PIXEL, ZONES, ORIENTATION} = require('../shared/enum');
+const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
-const {OnJoinCommand, OnLeaveCommand, OnMoveCommand} = require("./command/game-command");
+const {OnJoinCommand, OnLeaveCommand, OnMoveCommand, OnUpdateCommand, OnIdleCommand} = require("./command/game-command");
 
 class GameRoom extends colyseus.Room {
 
@@ -19,6 +19,17 @@ class GameRoom extends colyseus.Room {
         message
       });
     });
+
+    this.onMessage("idle",(client, message) =>{
+      this.dispatcher.dispatch(new OnIdleCommand(), {
+        client,
+        message
+      });
+    });
+
+    this.setSimulationInterval((deltaTime) =>{
+      this.dispatcher.dispatch(new OnUpdateCommand(), deltaTime);
+    });
   }
 
   onJoin(client, options) {
@@ -26,7 +37,8 @@ class GameRoom extends colyseus.Room {
         id: client.sessionId,
         x: this.spawnPoint.x/TILESET_PIXEL,
         y: this.spawnPoint.y/TILESET_PIXEL,
-        orientation: ORIENTATION.DOWN
+        orientation: ORIENTATION.DOWN,
+        status: STATUS.IDLE
     });
   }
 

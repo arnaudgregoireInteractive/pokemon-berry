@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import GameScene from '../scene/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
+import { STATUS } from '../../../shared/enum';
 
 export default class GameContainer {
   constructor(container) {
@@ -18,7 +19,7 @@ export default class GameContainer {
           this.initializeEvents();
           this.room.onStateChange.once((state) =>{
             this.game = new Phaser.Game({
-              type: Phaser.AUTO,
+              type: Phaser.CANVAS,
               width: 1800,
               height: 900,
               parent: this.container.current,
@@ -60,10 +61,13 @@ export default class GameContainer {
   }
 
   onPlayerRemove(player, key){
-
+    if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
+      this.game.scene.getScene('game-scene').playerManager.removePlayer(key);
+    }
   }
 
   handlePlayerChange(change, player){
+    console.log(change);
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }

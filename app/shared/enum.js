@@ -11,4 +11,10 @@ const ORIENTATION = Object.freeze({
     DOWN: "DOWN"
 });
 
-module.exports = {ZONES, TILESET_PIXEL, ORIENTATION};
+const STATUS = Object.freeze({
+    IDLE: "IDLE",
+    MOVING: "MOVING",
+    SURFING: "SURFING"
+});
+
+module.exports = {ZONES, TILESET_PIXEL, ORIENTATION, STATUS};

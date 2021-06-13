@@ -1,5 +1,5 @@
 import Player from '../gameObject/player';
-import {TILESET_PIXEL} from '../../../shared/enum';
+import {TILESET_PIXEL, STATUS} from '../../../shared/enum';
 
 export default class PlayerManager{
     constructor(scene){
@@ -11,6 +11,7 @@ export default class PlayerManager{
     addPlayer(player){
         let phaserPlayer = new Player(this.scene, player);
         this.group.add(phaserPlayer);
+        this.player = phaserPlayer;
         this.scene.cameras.main.startFollow(phaserPlayer, true, 0.08, 0.08);
         this.scene.cameras.main.setZoom(5);
     }
@@ -24,6 +25,13 @@ export default class PlayerManager{
     }
 
     handlePlayerChange(player, change){
+        if(this.player.id == player.id && change.field == 'status' && change.value == STATUS.MOVING){
+            this.scene.disableInput = true;
+        }
+        if(this.player.id == player.id && change.field == 'status' && change.value == STATUS.IDLE){
+            this.scene.disableInput = false;
+        }
+
         this.group.getChildren().forEach((p) =>{
             if(p.id == player.id){
                 switch (change.field) {
@@ -39,8 +47,14 @@ export default class PlayerManager{
 
                     case 'orientation':
                         p.orientation = change.value;
+                        this.scene.animationManager.animate(p);
                         break;
                 
+                    case 'status':
+                        p.status = change.value;
+                        this.scene.animationManager.animate(p);
+                        break;
+
                     default:
                         break;
                 }
