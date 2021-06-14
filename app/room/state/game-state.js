@@ -7,7 +7,8 @@ class GameState extends schema.Schema {
     this.players = new schema.MapSchema();
     this.assign({
         zone: zone
-    })
+    });
+    this.data = require(`../../client/dist/asset/tilemap/${zone}.json`);
   }
 }
 

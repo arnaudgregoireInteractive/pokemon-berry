@@ -3,8 +3,8 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"PALLET_TOWN.json"
+         "format":"js",
+         "target":"..\/..\/..\/..\/shared\/PALLET_TOWN.js"
         }
     },
  "height":15,
@@ -48,7 +48,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_1#0"
+                         "value":"PALLET_TOWN-ROUTE_1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -66,7 +66,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_1#1"
+                         "value":"PALLET_TOWN-ROUTE_1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -84,14 +84,14 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-PALLET_TOWN_HOUSE1"
+                         "value":"PALLET_TOWN-HERO_HOME_1F"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":80,
-                 "y":96
+                 "y":80
                 }, 
                 {
                  "height":0,
@@ -102,14 +102,14 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-PALLET_TOWN_HOUSE_2"
+                         "value":"PALLET_TOWN-RIVAL_HOME_1F"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":192,
-                 "y":96
+                 "y":80
                 }, 
                 {
                  "height":0,
@@ -120,14 +120,14 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-PALLET_TOWN_LAB"
+                         "value":"PALLET_TOWN-OAKS_LAB_1F"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":208,
-                 "y":192
+                 "y":176
                 }, 
                 {
                  "height":0,
@@ -138,7 +138,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_21#0"
+                         "value":"PALLET_TOWN-ROUTE_21"
                         }],
                  "rotation":0,
                  "type":"",
@@ -156,7 +156,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_21#1"
+                         "value":"PALLET_TOWN-ROUTE_21"
                         }],
                  "rotation":0,
                  "type":"",
@@ -174,7 +174,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_21#2"
+                         "value":"PALLET_TOWN-ROUTE_21"
                         }],
                  "rotation":0,
                  "type":"",
@@ -192,7 +192,7 @@
                         {
                          "name":"link",
                          "type":"string",
-                         "value":"PALLET_TOWN-ROUTE_21#3"
+                         "value":"PALLET_TOWN-ROUTE_21"
                         }],
                  "rotation":0,
                  "type":"",
@@ -6609,6 +6609,51 @@
                         }]
                 }, 
                 {
+                 "id":540,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":541,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":542,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":543,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":544,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":552,
                  "properties":[
                         {
@@ -11515,6 +11560,69 @@
                 }, 
                 {
                  "id":1379,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1380,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1381,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1382,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1383,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1384,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1385,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1386,
                  "properties":[
                         {
                          "name":"collides",

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import GameScene from '../scene/game-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
-import { STATUS } from '../../../shared/enum';
+import { ZONES } from '../../../shared/enum';
 
 export default class GameContainer {
   constructor(container) {
@@ -14,7 +14,7 @@ export default class GameContainer {
 
   initialize(){
     try {
-      window._client.joinOrCreate("room", {/* options */}).then(room=>{
+      window._client.joinOrCreate(ZONES.PALLET_TOWN, {/* options */}).then(room=>{
           this.room = room;
           this.initializeEvents();
           this.room.onStateChange.once((state) =>{
@@ -46,6 +46,10 @@ export default class GameContainer {
     if(this.room){
       this.room.state.players.onAdd = (player) => this.onPlayerAdd(player);
       this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
+      this.room.onMessage("link", (message) => {
+        this.handleLink(message);
+      });
+      
     }
   }
 
@@ -67,7 +71,7 @@ export default class GameContainer {
   }
 
   handlePlayerChange(change, player){
-    console.log(change);
+    //console.log(change);
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
@@ -81,5 +85,21 @@ export default class GameContainer {
 
   handlePlayerInput(message){
     this.room.send('cursor', message);
+  }
+
+  handleLink(message){
+    console.log('handle link', message.to);
+    this.room.removeAllListeners();
+    this.room.leave();
+    window._client.joinOrCreate(message.to, {from: message.from}).then(room=>{
+      this.room = room;
+      this.initializeEvents();
+      this.room.onStateChange.once((state) =>{
+        this.game.scene.getScene('game-scene').scene.restart(room);
+      });
+    });
+  } catch (e) {
+    console.error("join error", e);
+    alert("error");
   }
 }

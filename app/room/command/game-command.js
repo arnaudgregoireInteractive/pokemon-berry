@@ -1,6 +1,6 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
-const {ORIENTATION, STATUS, KEY_STATUS} = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, TILESET_PIXEL} = require('../../shared/enum');
 
 class OnJoinCommand extends Command {
   execute({id,x,y,orientation,status}) {
@@ -21,6 +21,7 @@ class OnCursorCommand extends Command{
 }
 
 class OnUpdateCommand extends Command {
+
   execute(deltaTime) {
     this.state.players.forEach(player => {
       //console.log(player.moveCooldown);
@@ -83,61 +84,71 @@ class OnUpdateCommand extends Command {
     }
     //console.log(this.room.data.width * desiredY + desiredX);
     //console.log(`from ${player.x}, ${player.y} to ${desiredX}, ${desiredY}`);
-
-    if(desiredX >= 0 && desiredX < this.room.data.width && desiredY >=0 && desiredY < this.room.data.height){
-
-      let firstLayerId = this.room.data.layers[0].data[this.room.data.width * desiredY + desiredX];
-      let accessibleFirstLayer = false;
-      let secondLayerId =  this.room.data.layers[1].data[this.room.data.width * desiredY + desiredX];
-      //console.log('second layer id', secondLayerId);
-      let accessibleSecondLayer = true;
-      if(firstLayerId != 0){
-        let tile = this.room.data.tilesets[0].tiles.find(t=>{return t.id == firstLayerId - this.room.data.tilesets[0].firstgid});
-        if(tile){
-          let walkableProperty = tile.properties.find(p=>{return p.name == "walkable"});
-          if(walkableProperty){
-            accessibleFirstLayer = walkableProperty.value;
+    let link = this.checkLinks(desiredX, desiredY);
+    if(link && link.properties[0].value != "SPAWN_POINT"){
+      //console.log('move to', link.properties[0].value);
+      let split = link.properties[0].value.split('-');
+      //console.log(split);
+      let client = this.room.clients.find(c=>{return c.id == player.id});
+      client.send('link', {from: split[0], to : split[1]});
+    }
+    else{
+      if(desiredX >= 0 && desiredX < this.state.data.width && desiredY >=0 && desiredY < this.state.data.height){
+        let firstLayerId = this.state.data.layers[0].data[this.state.data.width * desiredY + desiredX];
+        let accessibleFirstLayer = false;
+        let secondLayerId =  this.state.data.layers[1].data[this.state.data.width * desiredY + desiredX];
+        //console.log('first layer id', firstLayerId);
+        let accessibleSecondLayer = true;
+        if(firstLayerId != 0){
+          let tile = this.state.data.tilesets[0].tiles.find(t=>{return t.id == firstLayerId - this.state.data.tilesets[0].firstgid});
+          if(tile){
+            let walkableProperty = tile.properties.find(p=>{return p.name == "walkable"});
+            if(walkableProperty){
+              accessibleFirstLayer = walkableProperty.value;
+            }
           }
         }
-      }
-      else{
-        accessibleFirstLayer = true;
-      }
-      if(secondLayerId != 0 && accessibleFirstLayer){
-        let tile = this.room.data.tilesets[1].tiles.find(t=>{return t.id == secondLayerId - this.room.data.tilesets[1].firstgid});
-        if(tile){
-          //console.log(tile);
-          let collidesProperty = tile.properties.find(p=>{return p.name == "collides"});
-          if(collidesProperty){
-            accessibleSecondLayer = !collidesProperty.value;
+        else{
+          accessibleFirstLayer = true;
+        }
+        if(secondLayerId != 0 && accessibleFirstLayer){
+          let tile = this.state.data.tilesets[1].tiles.find(t=>{return t.id == secondLayerId - this.state.data.tilesets[1].firstgid});
+          if(tile){
+            //console.log(tile);
+            let collidesProperty = tile.properties.find(p=>{return p.name == "collides"});
+            if(collidesProperty){
+              accessibleSecondLayer = !collidesProperty.value;
+            }
           }
         }
-      }
-      else{
-        accessibleSecondLayer = true;
-      }
-      if(accessibleFirstLayer && accessibleSecondLayer){
-        //console.log('move to ', desiredX, desiredY, accessibleFirstLayer);
-        player.status = STATUS.MOVING;
-        player.moveCooldown = 250;
-        player.x = desiredX;
-        player.y = desiredY;
+        else{
+          accessibleSecondLayer = true;
+        }
+        if(accessibleFirstLayer && accessibleSecondLayer){
+          //console.log('move to ', desiredX, desiredY, accessibleFirstLayer);
+          player.status = STATUS.MOVING;
+          player.moveCooldown = 250;
+          player.x = desiredX;
+          player.y = desiredY;
+        }
       }
     }
-    
+  }
+
+  checkLinks(desiredX, desiredY){
+    for (let i = 0; i < this.state.data.layers[2].objects.length; i++) {
+      const obj = this.state.data.layers[2].objects[i];
+      if(obj.x / TILESET_PIXEL == desiredX && obj.y / TILESET_PIXEL == desiredY){
+        return obj;
+      }
+    }
   }
 }
 
-class OnIdleCommand extends Command{
-  execute({client, message}){
-    this.state.players.get(client.sessionId).status = STATUS.IDLE;
-  }
-}
 
 module.exports = {
   OnJoinCommand: OnJoinCommand,
   OnLeaveCommand: OnLeaveCommand,
   OnUpdateCommand: OnUpdateCommand,
-  OnIdleCommand: OnIdleCommand,
   OnCursorCommand: OnCursorCommand
 };

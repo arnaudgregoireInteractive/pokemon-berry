@@ -1,7 +1,6 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const {KEY_STATUS} = require('../../shared/enum');
-const { layers } = require('../../shared/PALLET_TOWN');
 
 class Player extends Schema {
   constructor(id, x, y, orientation, status) {
