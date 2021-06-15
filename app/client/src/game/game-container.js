@@ -4,8 +4,9 @@ import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import { ZONES } from '../../../shared/enum';
 
 export default class GameContainer {
-  constructor(container) {
-    this.container = container;
+  constructor(component) {
+    this.component = component;
+    this.container = component.container;
     this.game = undefined;
     this.room = undefined;
     this.player = undefined;
@@ -49,7 +50,9 @@ export default class GameContainer {
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
       });
-      
+      this.room.onMessage("message", (message)=>{
+        this.component.receiveMessage(message.payload);
+      });
     }
   }
 
@@ -87,8 +90,12 @@ export default class GameContainer {
     this.room.send('cursor', message);
   }
 
+  sendMessage(message){
+    this.room.send('message', {payload : message});
+  }
+
   handleLink(message){
-    console.log('handle link', message.to);
+    //console.log('handle link', message.to);
     this.room.removeAllListeners();
     this.room.leave();
     window._client.joinOrCreate(message.to, {from: message.from}).then(room=>{

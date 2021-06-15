@@ -20,6 +20,12 @@ class OnCursorCommand extends Command{
   }
 }
 
+class OnMessageCommand extends Command{
+  execute({client, message}){
+    this.room.broadcast("message", message, { except: client });
+  }
+}
+
 class OnUpdateCommand extends Command {
 
   execute(deltaTime) {
@@ -151,5 +157,6 @@ module.exports = {
   OnJoinCommand: OnJoinCommand,
   OnLeaveCommand: OnLeaveCommand,
   OnUpdateCommand: OnUpdateCommand,
-  OnCursorCommand: OnCursorCommand
+  OnCursorCommand: OnCursorCommand,
+  OnMessageCommand: OnMessageCommand
 };
