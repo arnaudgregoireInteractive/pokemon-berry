@@ -100,7 +100,7 @@ class OnUpdateCommand extends Command {
         //console.log('first layer id', firstLayerId);
         let accessibleSecondLayer = true;
         if(firstLayerId != 0){
-          let tile = this.state.data.tilesets[0].tiles.find(t=>{return t.id == firstLayerId - this.state.data.tilesets[0].firstgid});
+          let tile = this.room.collider[0].tiles.find(t=>{return t.id == firstLayerId - this.room.collider[0].firstgid});
           if(tile){
             let walkableProperty = tile.properties.find(p=>{return p.name == "walkable"});
             if(walkableProperty){
@@ -112,7 +112,8 @@ class OnUpdateCommand extends Command {
           accessibleFirstLayer = true;
         }
         if(secondLayerId != 0 && accessibleFirstLayer){
-          let tile = this.state.data.tilesets[1].tiles.find(t=>{return t.id == secondLayerId - this.state.data.tilesets[1].firstgid});
+          //console.log(secondLayerId);
+          let tile = this.room.collider[1].tiles.find(t=>{return t.id == secondLayerId - this.room.collider[1].firstgid});
           if(tile){
             //console.log(tile);
             let collidesProperty = tile.properties.find(p=>{return p.name == "collides"});

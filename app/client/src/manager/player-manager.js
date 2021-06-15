@@ -32,12 +32,12 @@ export default class PlayerManager{
                 switch (change.field) {
                     case 'x':
                         p.positionX = change.value;
-                        p.moveManager.moveTo(p.positionX * TILESET_PIXEL + TILESET_PIXEL / 2, p.positionY * TILESET_PIXEL + TILESET_PIXEL / 2);
+                        p.moveManager.moveTo(p.positionX * TILESET_PIXEL + TILESET_PIXEL / 2, p.positionY * TILESET_PIXEL + TILESET_PIXEL / 2 -2);
                         break;
 
                     case 'y':
                         p.positionY = change.value;
-                        p.moveManager.moveTo(p.positionX * TILESET_PIXEL + TILESET_PIXEL / 2, p.positionY * TILESET_PIXEL + TILESET_PIXEL / 2);
+                        p.moveManager.moveTo(p.positionX * TILESET_PIXEL + TILESET_PIXEL / 2, p.positionY * TILESET_PIXEL + TILESET_PIXEL / 2 -2);
                         break;
 
                     case 'orientation':

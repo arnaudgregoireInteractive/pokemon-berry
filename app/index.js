@@ -20,18 +20,20 @@ app.get('/', (req, res) => {
 });
 
 // Colyseus room
+const { ZONES } = require('./shared/enum');
 const PalletTownRoom = require('./room/pallet-town-room');
 const HeroHome1fRoom = require('./room/hero_home_1f-room');
 const HeroHome2fRoom = require('./room/hero_home_2f-room');
 const RivalHome1fRoom = require('./room/rival_home_1f-room');
 const OakLab1fRoom = require('./room/oak_lab_1f-room');
-const { ZONES } = require('./shared/enum');
+const Route1Room = require('./room/route1-room');
 
 gameServer.define(ZONES.PALLET_TOWN, PalletTownRoom);
 gameServer.define(ZONES.HERO_HOME_1F, HeroHome1fRoom);
 gameServer.define(ZONES.HERO_HOME_2F, HeroHome2fRoom);
 gameServer.define(ZONES.RIVAL_HOME_1F, RivalHome1fRoom);
 gameServer.define(ZONES.OAKS_LAB_1F, OakLab1fRoom);
+gameServer.define(ZONES.ROUTE1, Route1Room);
 
 // Start
 gameServer.listen(port).then(() => {

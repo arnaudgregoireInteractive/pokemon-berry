@@ -3,7 +3,7 @@ import { TILESET_PIXEL } from '../../../shared/enum';
 
 export default class Player extends GameObjects.Container {
   constructor(scene, player) {
-    super(scene, player.x * TILESET_PIXEL +TILESET_PIXEL/2, player.y * TILESET_PIXEL + TILESET_PIXEL/2);
+    super(scene, player.x * TILESET_PIXEL +TILESET_PIXEL/2, player.y * TILESET_PIXEL + TILESET_PIXEL/2 -2);
     this.id = player.id;
     this.positionX = player.x;
     this.positionY = player.y;

@@ -2,6 +2,7 @@ const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
+const collider = require('../shared/collider.json').tilesets;
 const {OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand} = require("./command/game-command");
 
 class GameRoom extends colyseus.Room {
@@ -9,6 +10,7 @@ class GameRoom extends colyseus.Room {
   constructor(zone){
     super();
     this.zone = zone;
+    this.collider = collider;
   }
 
   onCreate() {
@@ -36,7 +38,7 @@ class GameRoom extends colyseus.Room {
       let linkStr = `${this.zone}-${options.from}`;
       //console.log(this.state.data.layers[2].objects);
       let link = this.state.data.layers[2].objects.find(obj =>{return obj.properties[0].value == linkStr});
-      console.log(linkStr, link);
+      //console.log(linkStr, link);
       x = link.x / TILESET_PIXEL;
       y = link.y / TILESET_PIXEL;
     }

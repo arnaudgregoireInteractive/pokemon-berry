@@ -3,7 +3,8 @@ const ZONES = Object.freeze({
     HERO_HOME_1F:'HERO_HOME_1F',
     HERO_HOME_2F:'HERO_HOME_2F',
     RIVAL_HOME_1F: 'RIVAL_HOME_1F',
-    OAKS_LAB_1F: 'OAKS_LAB_1F'
+    OAKS_LAB_1F: 'OAKS_LAB_1F',
+    ROUTE1: 'ROUTE1'
 });
 
 const TILESET_PIXEL = 16;
