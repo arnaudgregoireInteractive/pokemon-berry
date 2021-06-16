@@ -22,7 +22,7 @@ class OnCursorCommand extends Command{
 
 class OnMessageCommand extends Command{
   execute({client, message}){
-    this.room.broadcast("message", message, { except: client });
+    this.state.addMessage(client.sessionId, message.payload);
   }
 }
 

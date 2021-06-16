@@ -21,6 +21,7 @@ export default class GameContainer {
           this.room.onStateChange.once((state) =>{
             this.game = new Phaser.Game({
               type: Phaser.CANVAS,
+              mode: Phaser.Scale.FIT,
               width: 1800,
               height: 900,
               parent: this.container.current,
@@ -46,12 +47,10 @@ export default class GameContainer {
   initializeEvents(){
     if(this.room){
       this.room.state.players.onAdd = (player) => this.onPlayerAdd(player);
+      this.room.state.messages.onAdd = this.component.refs.chat.receiveMessage;
       this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
-      });
-      this.room.onMessage("message", (message)=>{
-        this.component.receiveMessage(message.payload);
       });
     }
   }

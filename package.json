@@ -23,11 +23,12 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "helmet": "^4.6.0",
+    "nes.css": "^2.3.0",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.52",
     "react": "^17.0.2",
-    "react-chat-widget": "^3.0.5",
     "react-dom": "^17.0.2",
+    "react-draggable": "^4.4.3",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
