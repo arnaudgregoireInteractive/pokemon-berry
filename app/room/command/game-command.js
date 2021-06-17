@@ -26,6 +26,46 @@ class OnMessageCommand extends Command{
   }
 }
 
+class OnInteractionCommand extends Command{
+  execute({client, message}){
+    let player = this.state.players.get(client.sessionId);
+    let desiredX = player.x;
+    let desiredY = player.y;
+
+    switch (player.orientation) {
+      case ORIENTATION.LEFT:
+        desiredX -= 1;
+        break;
+
+      case ORIENTATION.UP:
+        desiredY -= 1;
+        break;
+
+      case ORIENTATION.RIGHT:
+        desiredX += 1;
+        break;
+
+      case ORIENTATION.DOWN:
+        desiredY += 1;
+        break;
+    
+      default:
+        break;
+    }
+
+    let npc;
+    for (let i = 0; i < this.state.data.layers[3].objects.length; i++) {
+      const obj = this.state.data.layers[3].objects[i];
+      if(Math.floor(obj.x / TILESET_PIXEL) == desiredX && Math.floor(obj.y / TILESET_PIXEL) == desiredY){
+        npc = obj;
+      }
+    }
+    if(npc){
+      client.send('dialog',{nickName : npc.properties[0].value, speech: npc.properties[1].value});
+    }
+  }
+}
+
 class OnUpdateCommand extends Command {
 
   execute(deltaTime) {
@@ -98,6 +138,9 @@ class OnUpdateCommand extends Command {
       let client = this.room.clients.find(c=>{return c.id == player.id});
       client.send('link', {from: split[0], to : split[1]});
     }
+    if(this.checkNpc(desiredX, desiredY)){
+      return;
+    }
     else{
       if(desiredX >= 0 && desiredX < this.state.data.width && desiredY >=0 && desiredY < this.state.data.height){
         let firstLayerId = this.state.data.layers[0].data[this.state.data.width * desiredY + desiredX];
@@ -150,6 +193,15 @@ class OnUpdateCommand extends Command {
       }
     }
   }
+
+  checkNpc(desiredX, desiredY){
+    for (let i = 0; i < this.state.data.layers[3].objects.length; i++) {
+      const obj = this.state.data.layers[3].objects[i];
+      if(Math.floor(obj.x / TILESET_PIXEL) == desiredX && Math.floor(obj.y / TILESET_PIXEL) == desiredY){
+        return obj;
+      }
+    }
+  }
 }
 
 
@@ -158,5 +210,6 @@ module.exports = {
   OnLeaveCommand: OnLeaveCommand,
   OnUpdateCommand: OnUpdateCommand,
   OnCursorCommand: OnCursorCommand,
-  OnMessageCommand: OnMessageCommand
+  OnMessageCommand: OnMessageCommand,
+  OnInteractionCommand: OnInteractionCommand
 };

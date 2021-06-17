@@ -98,9 +98,43 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"npcs",
+         "objects":[
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"BOY_3\/0",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Rival Blue"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"Im your rival"
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":72,
+                 "y":92
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":5,
+ "nextlayerid":5,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

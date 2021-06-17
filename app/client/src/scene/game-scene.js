@@ -1,8 +1,7 @@
-import {Scene, GameObjects} from 'phaser';
+import {Scene} from 'phaser';
 import PlayerManager from '../manager/player-manager';
-import {ORIENTATION, KEY_STATUS, ZONES} from '../../../shared/enum';
+import {ORIENTATION, KEY_STATUS, ZONES, NPC_ID} from '../../../shared/enum';
 import AnimationManager from '../manager/animation-manager';
-
 export default class GameScene extends Scene {
   constructor() {
     super({
@@ -12,6 +11,7 @@ export default class GameScene extends Scene {
 
   preload() {
     this.load.multiatlas('hero', 'asset/atlas/hero.json', 'asset/atlas/');
+    this.load.multiatlas('npcs', 'asset/atlas/npcs.json', 'asset/atlas/');
     this.load.image('tileset-building', `asset/tileset/tileset-building.png`);
     this.load.image('tileset-world', `asset/tileset/tileset-world.png`);
     this.load.tilemapTiledJSON(this.zone, `asset/tilemap/${this.zone}.json`);
@@ -26,6 +26,11 @@ export default class GameScene extends Scene {
 
     this.world = this.map.createLayer('world', this.tilesetWorld, 0, 0);
     this.building = this.map.createLayer('buildings', this.tilesetBuilding, 0, 0);
+    Object.keys(NPC_ID).forEach(id=>{
+      [0,2,4,6].forEach(orientation=>{
+        this.map.createFromObjects('npcs',{name:`${id}/${orientation}`, key: 'npcs', frame:`${id}/${orientation}`});
+      });
+    });
 
     this.animationManager = new AnimationManager(this);
     this.playerManager = new PlayerManager(this);
@@ -33,7 +38,8 @@ export default class GameScene extends Scene {
     this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-    
+    this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
     this.initialize();
   }
 
@@ -74,6 +80,9 @@ export default class GameScene extends Scene {
     }
     if (Phaser.Input.Keyboard.JustUp(this.downKey)){
       document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.DOWN, input: KEY_STATUS.UP}}));
+    }
+    if(Phaser.Input.Keyboard.JustDown(this.spaceKey)){
+      document.getElementById('game').dispatchEvent(new CustomEvent("interaction"));
     }
   }
 }

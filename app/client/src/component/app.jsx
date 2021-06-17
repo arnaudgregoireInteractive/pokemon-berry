@@ -11,14 +11,20 @@ export default class App extends React.Component {
 
   componentDidMount(){
     document.getElementById('game').addEventListener('cursor', (this.handlePlayerInput.bind(this)));
+    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
   }
 
   componentWillUnmount(){
     document.getElementById('game').removeEventListener('cursor', this.handlePlayerInput.bind(this));
+    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
   }
 
   handlePlayerInput(e){
     this.game.handlePlayerInput(e.detail);
+  }
+
+  handleInteractionInput(e){
+    this.game.handleInteractionInput();
   }
 
   sendMessage(newMessage){

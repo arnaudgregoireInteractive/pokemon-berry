@@ -98,9 +98,66 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"npcs",
+         "objects":[
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"PROFESSOR\/0",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Professor Oak"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"You don't have any pokemons ? I'll give you something to start."
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":104,
+                 "y":72
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"SCIENTIST\/2",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Assistant Shen"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"Professor Oak know every pokemons in the word. He told me there are around 150 different pokemons !"
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":184,
+                 "y":184
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":5,
+ "nextlayerid":5,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

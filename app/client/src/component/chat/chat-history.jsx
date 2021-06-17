@@ -10,8 +10,6 @@ import { findDOMNode } from 'react-dom';
             var domMessages = findDOMNode(this.refs.history);
             domMessages.scrollTop = domMessages.scrollHeight;
         }
-
-        console.log('scroll top');
     }
 
     createMessage(message, index){

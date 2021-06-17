@@ -224,9 +224,66 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"npcs",
+         "objects":[
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"BOY_1\/0",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Dev Keldaan"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"Hello, my name is Keldaan. Im the developer of this beautiful game."
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":56,
+                 "y":88
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"KID_1\/6",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Little Girl Claire"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"when I grow up, I want to grow berries."
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":40,
+                 "y":184
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":15,
+ "nextlayerid":6,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

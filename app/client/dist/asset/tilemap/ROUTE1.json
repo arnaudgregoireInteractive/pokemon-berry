@@ -72,9 +72,43 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"npcs",
+         "objects":[
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"KID_1\/0",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"nickname",
+                         "type":"string",
+                         "value":"Little Girl Claire"
+                        }, 
+                        {
+                         "name":"speech",
+                         "type":"string",
+                         "value":"when I grow up, I want to grow berries."
+                        }],
+                 "rotation":0,
+                 "type":"DIALOG",
+                 "visible":true,
+                 "width":0,
+                 "x":168,
+                 "y":424
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":3,
+ "nextlayerid":5,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.0",

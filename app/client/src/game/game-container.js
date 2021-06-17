@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import GameScene from '../scene/game-scene';
+import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import { ZONES } from '../../../shared/enum';
 
 export default class GameContainer {
@@ -25,17 +27,23 @@ export default class GameContainer {
               width: 1800,
               height: 900,
               parent: this.container.current,
-              scene: [GameScene],
+              scene: [GameScene, UIScene],
               pixelArt: true,
               plugins: {
                 global: [{
                   key: 'rexMoveTo',
                   plugin: MoveToPlugin,
                   start: true
+                }],
+                scene:[{
+                  key: 'rexUI',
+                  plugin: RexUIPlugin,
+                  mapping: 'rexUI'
                 }]
               }
             });
             this.game.scene.start('game-scene', room);
+            this.game.scene.start('ui-scene');
           });
         });
     } catch (e) {
@@ -51,6 +59,9 @@ export default class GameContainer {
       this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
+      });
+      this.room.onMessage("dialog", (message) => {
+        this.handleDialog(message);
       });
     }
   }
@@ -89,8 +100,16 @@ export default class GameContainer {
     this.room.send('cursor', message);
   }
 
+  handleInteractionInput(){
+    this.room.send('interaction');
+  }
+
   sendMessage(message){
     this.room.send('message', {payload : message});
+  }
+
+  handleDialog(message){
+    this.game.scene.getScene('ui-scene').renderDialog(message);
   }
 
   handleLink(message){

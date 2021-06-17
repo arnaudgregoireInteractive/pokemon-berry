@@ -1,0 +1,1196 @@
+{
+	"textures": [
+		{
+			"image": "npcs.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 280,
+				"h": 64
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "GIRL_3/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "GIRL_3/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 1,
+						"y": 23,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "BOY_1/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 1,
+						"y": 45,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "BOY_1/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 18
+					},
+					"frame": {
+						"x": 17,
+						"y": 45,
+						"w": 14,
+						"h": 18
+					}
+				},
+				{
+					"filename": "PROFESSOR/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 19,
+						"y": 1,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "PROFESSOR/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 19,
+						"y": 23,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "BOY_1/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 33,
+						"y": 45,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "BOY_3/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 37,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "BOY_3/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 37,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "BOY_1/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 18
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 47,
+						"y": 45,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "GIRL_0/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 53,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "GIRL_0/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 53,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_1/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 61,
+						"y": 45,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "GIRL_0/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "GIRL_0/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 69,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_1/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 75,
+						"y": 45,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "GIRL_3/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 85,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "GIRL_3/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 85,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_1/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 89,
+						"y": 45,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "PROFESSOR/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 101,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "PROFESSOR/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 101,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_1/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 17
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 17
+					},
+					"frame": {
+						"x": 103,
+						"y": 45,
+						"w": 12,
+						"h": 17
+					}
+				},
+				{
+					"filename": "SCIENTIST/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 117,
+						"y": 1,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "SCIENTIST/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 20
+					},
+					"frame": {
+						"x": 117,
+						"y": 23,
+						"w": 14,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_0/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 117,
+						"y": 45,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_0/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 131,
+						"y": 45,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "BOY_3/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 20
+					},
+					"frame": {
+						"x": 133,
+						"y": 1,
+						"w": 12,
+						"h": 20
+					}
+				},
+				{
+					"filename": "BOY_3/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 20
+					},
+					"frame": {
+						"x": 133,
+						"y": 23,
+						"w": 12,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_2/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 145,
+						"y": 45,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "SCIENTIST/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 20
+					},
+					"frame": {
+						"x": 147,
+						"y": 1,
+						"w": 12,
+						"h": 20
+					}
+				},
+				{
+					"filename": "SCIENTIST/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 20
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 20
+					},
+					"frame": {
+						"x": 147,
+						"y": 23,
+						"w": 12,
+						"h": 20
+					}
+				},
+				{
+					"filename": "KID_2/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 159,
+						"y": 45,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "GIRL_2/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 19
+					},
+					"frame": {
+						"x": 161,
+						"y": 1,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_2/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 16,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 16,
+						"h": 19
+					},
+					"frame": {
+						"x": 161,
+						"y": 22,
+						"w": 16,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_0/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 173,
+						"y": 43,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_0/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 179,
+						"y": 1,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_2/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 179,
+						"y": 22,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_2/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 189,
+						"y": 43,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_1/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 195,
+						"y": 1,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_1/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 195,
+						"y": 22,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_2/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 205,
+						"y": 43,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_2/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 14,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 19
+					},
+					"frame": {
+						"x": 211,
+						"y": 1,
+						"w": 14,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_1/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 13,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 19
+					},
+					"frame": {
+						"x": 211,
+						"y": 22,
+						"w": 13,
+						"h": 19
+					}
+				},
+				{
+					"filename": "GIRL_1/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 13,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 13,
+						"h": 19
+					},
+					"frame": {
+						"x": 221,
+						"y": 43,
+						"w": 13,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_0/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 226,
+						"y": 22,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_0/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 227,
+						"y": 1,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_2/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 236,
+						"y": 43,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "BOY_2/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 19
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 240,
+						"y": 22,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "KID_3/0",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 241,
+						"y": 1,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_3/4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 12,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 12,
+						"h": 14
+					},
+					"frame": {
+						"x": 250,
+						"y": 43,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_0/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 254,
+						"y": 17,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_0/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 255,
+						"y": 1,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_2/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 264,
+						"y": 33,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_2/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 267,
+						"y": 17,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_3/2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 268,
+						"y": 1,
+						"w": 11,
+						"h": 14
+					}
+				},
+				{
+					"filename": "KID_3/6",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 11,
+						"h": 14
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 11,
+						"h": 14
+					},
+					"frame": {
+						"x": 264,
+						"y": 49,
+						"w": 11,
+						"h": 14
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:b48eb461d262069e3f3c3d3cbed86810:8081616361856ac38f894b08f33022c9:20e8206f418e80657f5bfcdaa8ffa9c7$"
+	}
+}
