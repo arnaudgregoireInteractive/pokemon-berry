@@ -2,7 +2,6 @@ const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
-const collider = require('../shared/collider.json').tilesets;
 const {OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand} = require("./command/game-command");
 
 class GameRoom extends colyseus.Room {
@@ -10,7 +9,6 @@ class GameRoom extends colyseus.Room {
   constructor(zone){
     super();
     this.zone = zone;
-    this.collider = collider;
   }
 
   onCreate() {
