@@ -55,14 +55,45 @@ export default class GameContainer {
   initializeEvents(){
     if(this.room){
       this.room.state.players.onAdd = (player) => this.onPlayerAdd(player);
-      this.room.state.messages.onAdd = this.component.refs.chat.receiveMessage;
       this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
+
+      this.room.state.berries.onAdd = (player) => this.onBerryAdd(player);
+      this.room.state.berries.onRemove = (player, key) => this.onBerryRemove(player);
+
+      this.room.state.messages.onAdd = this.component.refs.chat.receiveMessage;
+      
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
       });
       this.room.onMessage("dialog", (message) => {
         this.handleDialog(message);
       });
+    }
+  }
+
+  onBerryAdd(berry){
+    berry.onChange = ((changes) => {
+      changes.forEach((change) => this.handleBerryChange(change, berry));
+    });
+
+    this.handleBerryAdd(berry);
+  }
+
+  onBerryRemove(berry, key){
+    if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').berryManager){
+      this.game.scene.getScene('game-scene').berryManager.removeBerry(key);
+    }
+  }
+
+  handleBerryChange(change, berry){
+    if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').berryManager){
+      this.game.scene.getScene('game-scene').berryManager.handleBerryChange(berry, change);
+    }
+  }
+
+  handleBerryAdd(berry){
+    if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').berryManager){
+      this.game.scene.getScene('game-scene').berryManager.addBerry(berry);
     }
   }
 

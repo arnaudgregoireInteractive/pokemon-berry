@@ -1,4 +1,4 @@
-import {STATUS} from '../../../shared/enum';
+import {BERRY_STATUS, BERRY_TYPE, STATUS} from '../../../shared/enum';
 
 export default class AnimationManager {
   constructor(scene) {
@@ -17,6 +17,23 @@ export default class AnimationManager {
       'DOWN': false
     };
     this.createHeroAnimations();
+    this.createBerryAnimations();
+  }
+
+  createBerryAnimations(){
+    Object.keys(BERRY_TYPE).forEach(type =>{
+      Object.keys(BERRY_STATUS).forEach(status =>{
+        this.scene.anims.create({
+          key: `${type}/${status}`,
+          frames: this.scene.anims.generateFrameNames('berries', {
+              frames: status === BERRY_STATUS.SEED ? [0] : [0,1],
+              prefix: `${type}/${status}/`
+          }),
+          duration: 500,
+          repeat: -1
+        });
+      });
+    });
   }
 
   createHeroAnimations(){
@@ -40,6 +57,12 @@ export default class AnimationManager {
   animate(entity) {
     const key = this.getSpriteKey(entity);
     this.playAnimation(entity, key);
+  }
+
+  animateBerry(berry){
+    //console.log(`${berry.type}/${berry.status}`);
+    //console.log(berry.sprite);
+    berry.sprite.play(`${berry.type}/${berry.status}`);
   }
 
   playAnimation(entity, spriteKey) {

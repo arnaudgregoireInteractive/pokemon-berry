@@ -1,6 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
-const {ORIENTATION, STATUS, KEY_STATUS, TILESET_PIXEL} = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, BERRY_TYPE, BERRY_NAME } = require('../../shared/enum');
+const Berry = require('../schema/berry');
 
 class OnJoinCommand extends Command {
   execute({id,x,y,orientation,status}) {
@@ -93,7 +94,7 @@ class OnUpdateCommand extends Command {
       return;
     }
     else{
-      let accessibleFirstLayer = this.state.checkWorld(desiredPosition);
+      let accessibleFirstLayer = this.state.checkProperty(desiredPosition, 'walkable');
       let accessibleSecondLayer;
       if(accessibleFirstLayer){
         accessibleSecondLayer = this.state.checkBuilding(desiredPosition);
@@ -105,6 +106,11 @@ class OnUpdateCommand extends Command {
           player.moveCooldown = 250;
           player.x = desiredPosition.x;
           player.y = desiredPosition.y;
+          this.state.berries.forEach(berry =>{
+            if(berry.ownerId == player.id){
+              berry.grow();
+            }
+          });
       }
     }
   }
@@ -112,7 +118,10 @@ class OnUpdateCommand extends Command {
 
 class OnPlantCommand extends Command{
   execute({client, message}){
-    this.state.addMessage(client.sessionId, message.payload);
+    let player = this.state.players.get(client.sessionId);
+    let desiredPosition = this.state.getDesiredPosition(player);
+    let berry = new Berry(BERRY_TYPE[BERRY_TYPE.CHERI_BERRY], desiredPosition.x, desiredPosition.y, client.sessionId);
+    this.state.berries.set(berry.id, berry);
   }
 }
 

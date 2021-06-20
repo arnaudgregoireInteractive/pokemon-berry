@@ -1,0 +1,650 @@
+{
+	"textures": [
+		{
+			"image": "berries.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 64,
+				"h": 191
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "CHESTO_BERRY/BLOOM/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 5,
+						"w": 22,
+						"h": 26
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 22,
+						"h": 26
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/BERRY/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 16,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 29,
+						"w": 16,
+						"h": 25
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/BLOOM/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 16,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 56,
+						"w": 16,
+						"h": 25
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/BERRY/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 15,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 83,
+						"w": 15,
+						"h": 25
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/BLOOM/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 6,
+						"w": 15,
+						"h": 25
+					},
+					"frame": {
+						"x": 1,
+						"y": 110,
+						"w": 15,
+						"h": 25
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/thumbnail",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 137,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/BERRY/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 18,
+						"y": 83,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/thumbnail",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 22,
+						"h": 22
+					},
+					"frame": {
+						"x": 18,
+						"y": 109,
+						"w": 22,
+						"h": 22
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/BERRY/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 19,
+						"y": 29,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/thumbnail",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 24
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 20,
+						"h": 21
+					},
+					"frame": {
+						"x": 25,
+						"y": 1,
+						"w": 20,
+						"h": 21
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/BLOOM/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 7,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 19,
+						"y": 55,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/BERRY/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 38,
+						"y": 81,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/BERRY/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 39,
+						"y": 24,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/TALLER/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 11,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 47,
+						"y": 1,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/BLOOM/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 39,
+						"y": 50,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/BLOOM/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 8,
+						"w": 18,
+						"h": 24
+					},
+					"frame": {
+						"x": 27,
+						"y": 133,
+						"w": 18,
+						"h": 24
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/TALLER/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 11,
+						"w": 16,
+						"h": 20
+					},
+					"frame": {
+						"x": 42,
+						"y": 107,
+						"w": 16,
+						"h": 20
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/TALLER/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 18,
+						"w": 18,
+						"h": 14
+					},
+					"frame": {
+						"x": 27,
+						"y": 159,
+						"w": 18,
+						"h": 14
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/TALLER/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 9,
+						"w": 14,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 163,
+						"w": 14,
+						"h": 22
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/SEED/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 27,
+						"w": 8,
+						"h": 5
+					},
+					"frame": {
+						"x": 17,
+						"y": 163,
+						"w": 8,
+						"h": 5
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/SEED/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 27,
+						"w": 8,
+						"h": 5
+					},
+					"frame": {
+						"x": 17,
+						"y": 163,
+						"w": 8,
+						"h": 5
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/SEED/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 27,
+						"w": 8,
+						"h": 5
+					},
+					"frame": {
+						"x": 17,
+						"y": 163,
+						"w": 8,
+						"h": 5
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/TALLER/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 17,
+						"w": 17,
+						"h": 15
+					},
+					"frame": {
+						"x": 17,
+						"y": 175,
+						"w": 17,
+						"h": 15
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/SPROUT/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 36,
+						"y": 175,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/SPROUT/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 36,
+						"y": 175,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/SPROUT/0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 36,
+						"y": 175,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/TALLER/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 9,
+						"w": 14,
+						"h": 22
+					},
+					"frame": {
+						"x": 47,
+						"y": 129,
+						"w": 14,
+						"h": 22
+					}
+				},
+				{
+					"filename": "CHERI_BERRY/SPROUT/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 47,
+						"y": 153,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "CHESTO_BERRY/SPROUT/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 47,
+						"y": 153,
+						"w": 15,
+						"h": 12
+					}
+				},
+				{
+					"filename": "PECHA_BERRY/SPROUT/1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 22,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 20,
+						"w": 15,
+						"h": 12
+					},
+					"frame": {
+						"x": 47,
+						"y": 153,
+						"w": 15,
+						"h": 12
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:fcfc2a486562adab1332f6cfd0e70485:c1fc57634fe08b34197c94e343cc7721:7ee10fc07f160c4c48ec9e4f9f39b813$"
+	}
+}

@@ -58,7 +58,7 @@ class GameState extends schema.Schema {
     return accessibleSecondLayer;
   }
 
-  checkWorld(desiredPosition){
+  checkProperty(desiredPosition, property){
     let accessibleFirstLayer = false;
     if(desiredPosition.x >= 0 && desiredPosition.x < this.data.width && desiredPosition.y >=0 && desiredPosition.y < this.data.height){
       let firstLayerId = this.data.layers[0].data[this.data.width * desiredPosition.y + desiredPosition.x];
@@ -66,7 +66,7 @@ class GameState extends schema.Schema {
       if(firstLayerId != 0){
         let tile = this.collider[0].tiles.find(t=>{return t.id == firstLayerId - this.collider[0].firstgid});
         if(tile){
-          let walkableProperty = tile.properties.find(p=>{return p.name == "walkable"});
+          let walkableProperty = tile.properties.find(p=>{return p.name == property});
           if(walkableProperty){
             accessibleFirstLayer = walkableProperty.value;
           }

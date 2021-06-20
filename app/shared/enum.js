@@ -48,13 +48,13 @@ const NPC_TYPE = Object.freeze({
     DIALOG: 'DIALOG'
 });
 
-const BERRY = Object.freeze({
+const BERRY_TYPE = Object.freeze({
     CHERI_BERRY:'CHERI_BERRY',
     CHESTO_BERRY:'CHESTO_BERRY',
     PECHA_BERRY:'PECHA_BERRY'
 });
 
-const GROW_STATUS = Object.freeze({
+const BERRY_STATUS = Object.freeze({
     SEED: 'SEED',
     SPROUT: 'SPROUT',
     TALLER: 'TALLER',
@@ -68,4 +68,4 @@ const BERRY_NAME = Object.freeze({
     PECHA_BERRY: 'Pecha Berry'
 });
 
-module.exports = {ZONES, TILESET_PIXEL, ORIENTATION, STATUS, KEY_STATUS, NPC_ID, NPC_TYPE, BERRY_NAME, GROW_STATUS, BERRY};
+module.exports = {ZONES, TILESET_PIXEL, ORIENTATION, STATUS, KEY_STATUS, NPC_ID, NPC_TYPE, BERRY_TYPE, BERRY_NAME, BERRY_STATUS};

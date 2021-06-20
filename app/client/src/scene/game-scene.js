@@ -2,6 +2,7 @@ import {Scene} from 'phaser';
 import PlayerManager from '../manager/player-manager';
 import {ORIENTATION, KEY_STATUS, ZONES, NPC_ID} from '../../../shared/enum';
 import AnimationManager from '../manager/animation-manager';
+import BerryManager from '../manager/berry-manager';
 export default class GameScene extends Scene {
   constructor() {
     super({
@@ -12,6 +13,7 @@ export default class GameScene extends Scene {
   preload() {
     this.load.multiatlas('hero', 'asset/atlas/hero.json', 'asset/atlas/');
     this.load.multiatlas('npcs', 'asset/atlas/npcs.json', 'asset/atlas/');
+    this.load.multiatlas('berries', 'asset/atlas/berries.json', 'asset/atlas');
     this.load.image('tileset-building', `asset/tileset/tileset-building.png`);
     this.load.image('tileset-world', `asset/tileset/tileset-world.png`);
     this.load.tilemapTiledJSON(this.zone, `asset/tilemap/${this.zone}.json`);
@@ -34,6 +36,7 @@ export default class GameScene extends Scene {
 
     this.animationManager = new AnimationManager(this);
     this.playerManager = new PlayerManager(this);
+    this.berryManager = new BerryManager(this);
     this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
