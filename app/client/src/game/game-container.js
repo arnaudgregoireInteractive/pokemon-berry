@@ -68,6 +68,9 @@ export default class GameContainer {
       this.room.onMessage("dialog", (message) => {
         this.handleDialog(message);
       });
+      this.room.onMessage("berry-interaction", (message) =>{
+        this.handleBerryInteraction(message);
+      });
     }
   }
 
@@ -140,7 +143,14 @@ export default class GameContainer {
   }
 
   handleDialog(message){
-    this.game.scene.getScene('ui-scene').renderDialog(message);
+    this.game.scene.getScene('ui-scene').renderDialog(message.nickName, message.speech);
+  }
+
+  
+  handleBerryInteraction(message){ 
+    let berry = this.room.state.berries.get(message.id);
+    console.log(berry);
+    this.game.scene.getScene('ui-scene').renderDialog('', berry.dialog);
   }
 
   handleLink(message){

@@ -35,6 +35,10 @@ class OnInteractionCommand extends Command{
     if(npc){
       client.send('dialog',{nickName : npc.properties[0].value, speech: npc.properties[1].value});
     }
+    let berry = this.state.checkBerry(desiredPosition);
+    if(berry){
+      client.send('berry-interaction', {id: berry.id});
+    }
   }
 }
 
@@ -93,6 +97,9 @@ class OnUpdateCommand extends Command {
     if(this.state.checkNpc(desiredPosition)){
       return;
     }
+    if(this.state.checkBerry(desiredPosition)){
+      return;
+    }
     else{
       let accessibleFirstLayer = this.state.checkProperty(desiredPosition, 'walkable');
       let accessibleSecondLayer;
@@ -120,8 +127,10 @@ class OnPlantCommand extends Command{
   execute({client, message}){
     let player = this.state.players.get(client.sessionId);
     let desiredPosition = this.state.getDesiredPosition(player);
-    let berry = new Berry(BERRY_TYPE[BERRY_TYPE.CHERI_BERRY], desiredPosition.x, desiredPosition.y, client.sessionId);
-    this.state.berries.set(berry.id, berry);
+    if(!this.state.checkBerry(desiredPosition)){
+      let berry = new Berry(BERRY_TYPE[BERRY_TYPE.CHERI_BERRY], desiredPosition.x, desiredPosition.y, client.sessionId);
+      this.state.berries.set(berry.id, berry);
+    }
   }
 }
 

@@ -36,7 +36,7 @@ export default class BerryManager{
                     
                     case 'y':
                         p.positionY = change.value;
-                        p.setPosition(p.x, p.positionY * TILESET_PIXEL + TILESET_PIXEL/2 -2);
+                        p.setPosition(p.x, p.positionY * TILESET_PIXEL + 1);
                         break;
 
                     default:

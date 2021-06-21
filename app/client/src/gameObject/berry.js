@@ -4,7 +4,7 @@ import { TILESET_PIXEL, BERRY_STATUS } from '../../../shared/enum';
 export default class Berry extends GameObjects.Container {
   constructor(scene, berry) {
     //console.log(berry.id, berry.x, berry.y, berry.status, berry.dialog, berry.name);
-    super(scene, berry.x * TILESET_PIXEL +TILESET_PIXEL/2, berry.y * TILESET_PIXEL + TILESET_PIXEL/2 -2);
+    super(scene, berry.x * TILESET_PIXEL +TILESET_PIXEL/2, berry.y * TILESET_PIXEL +1);
     this.id = berry.id;
     this.positionX = berry.x;
     this.positionY = berry.y;

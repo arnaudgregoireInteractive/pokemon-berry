@@ -29,7 +29,7 @@ export default class AnimationManager {
               frames: status === BERRY_STATUS.SEED ? [0] : [0,1],
               prefix: `${type}/${status}/`
           }),
-          duration: 500,
+          duration: 1000,
           repeat: -1
         });
       });

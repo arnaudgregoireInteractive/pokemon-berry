@@ -16,7 +16,7 @@ export default class UIScene extends Scene {
     this.dialog = undefined; 
   }
 
-  renderDialog(message){
+  renderDialog(nickName, speech){
     if(this.dialog !== undefined){
         this.dialog.destroy();
         this.dialog = undefined;
@@ -25,7 +25,7 @@ export default class UIScene extends Scene {
         this.dialog = DialogGenerator.createTextBox(this, 450, 500, {
             wrapWidth: 800,
         })
-        .start(`${message.nickName} : ${message.speech}`, 20);
+        .start(`${nickName} : ${speech}`, 20);
     }
   }
 

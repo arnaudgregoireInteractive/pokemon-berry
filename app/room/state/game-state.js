@@ -75,6 +75,16 @@ class GameState extends schema.Schema {
     }
     return accessibleFirstLayer;
   }
+
+  checkBerry(desiredPosition){
+    let possibleBerry;
+    this.berries.forEach(berry=>{
+      if(berry.x == desiredPosition.x && berry.y == desiredPosition.y){
+        possibleBerry = berry;
+      }
+    });
+    return possibleBerry;
+  }
   
   getDesiredPosition(player){
 
