@@ -127,7 +127,7 @@ class OnPlantCommand extends Command{
   execute({client, message}){
     let player = this.state.players.get(client.sessionId);
     let desiredPosition = this.state.getDesiredPosition(player);
-    if(!this.state.checkBerry(desiredPosition)){
+    if(!this.state.checkBerry(desiredPosition) && this.state.checkProperty(desiredPosition, 'arable')){
       let berry = new Berry(BERRY_TYPE[BERRY_TYPE.CHERI_BERRY], desiredPosition.x, desiredPosition.y, client.sessionId);
       this.state.berries.set(berry.id, berry);
     }

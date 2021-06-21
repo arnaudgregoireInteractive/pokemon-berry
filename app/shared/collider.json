@@ -1476,6 +1476,11 @@
                  "id":1184,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1484,6 +1489,11 @@
                 {
                  "id":1185,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
@@ -1494,6 +1504,11 @@
                  "id":1186,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1502,6 +1517,11 @@
                 {
                  "id":1187,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
@@ -1512,6 +1532,11 @@
                  "id":1188,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1520,6 +1545,11 @@
                 {
                  "id":1213,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
@@ -1530,6 +1560,11 @@
                  "id":1214,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1538,6 +1573,11 @@
                 {
                  "id":1215,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
@@ -1548,6 +1588,11 @@
                  "id":1216,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1556,6 +1601,11 @@
                 {
                  "id":1241,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
@@ -1566,6 +1616,11 @@
                  "id":1242,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1575,6 +1630,11 @@
                  "id":1243,
                  "properties":[
                         {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
                          "name":"walkable",
                          "type":"bool",
                          "value":true
@@ -1583,6 +1643,11 @@
                 {
                  "id":1244,
                  "properties":[
+                        {
+                         "name":"arable",
+                         "type":"bool",
+                         "value":true
+                        }, 
                         {
                          "name":"walkable",
                          "type":"bool",
