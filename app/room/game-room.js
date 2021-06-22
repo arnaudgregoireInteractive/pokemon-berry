@@ -42,10 +42,6 @@ class GameRoom extends colyseus.Room {
         client,
         message
       });
-      this.dispatcher.dispatch(new OnPlantCommand(), {
-        client,
-        message
-      });
     });
     
     this.setSimulationInterval((deltaTime) =>{

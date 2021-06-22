@@ -1,6 +1,7 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 const {KEY_STATUS} = require('../../shared/enum');
+const Inventory = require('./inventory');
 
 class Player extends Schema {
   constructor(id, x, y, orientation, status) {
@@ -12,6 +13,7 @@ class Player extends Schema {
       orientation:orientation,
       status:status
     });
+    this.inventory = new Inventory(48);
     this.moveCooldown = 0;
     this.cursors = {
       LEFT: KEY_STATUS.UP,
@@ -27,7 +29,8 @@ schema.defineTypes(Player, {
   x: 'uint8',
   y: 'uint8',
   orientation: 'string',
-  status: 'string'
+  status: 'string',
+  inventory: Inventory
 });
 
 module.exports = Player;
