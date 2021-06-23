@@ -12,6 +12,10 @@ class Item extends Schema {
       stackable: false
     });
   }
+
+  use(player, desiredPosition, state){
+
+  }
 }
 
 schema.defineTypes(Item, {

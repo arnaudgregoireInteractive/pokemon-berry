@@ -13,7 +13,7 @@ class Player extends Schema {
       orientation:orientation,
       status:status
     });
-    this.inventory = new Inventory(48);
+    this.inventory = new Inventory(50);
     this.moveCooldown = 0;
     this.cursors = {
       LEFT: KEY_STATUS.UP,

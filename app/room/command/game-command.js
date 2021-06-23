@@ -123,13 +123,13 @@ class OnUpdateCommand extends Command {
   }
 }
 
-class OnPlantCommand extends Command{
+class OnItemUseCommand extends Command{
   execute({client, message}){
     let player = this.state.players.get(client.sessionId);
     let desiredPosition = this.state.getDesiredPosition(player);
-    if(!this.state.checkBerry(desiredPosition) && this.state.checkProperty(desiredPosition, 'arable')){
-      let berry = new Berry(BERRY_TYPE[BERRY_TYPE.CHERI_BERRY], desiredPosition.x, desiredPosition.y, client.sessionId);
-      this.state.berries.set(berry.id, berry);
+    let item = player.inventory.slots.get(message.id);
+    if(item && item.use(player, desiredPosition, this.state)){
+      player.inventory.removeItem(item);
     }
   }
 }
@@ -142,5 +142,5 @@ module.exports = {
   OnCursorCommand: OnCursorCommand,
   OnMessageCommand: OnMessageCommand,
   OnInteractionCommand: OnInteractionCommand,
-  OnPlantCommand: OnPlantCommand
+  OnItemUseCommand: OnItemUseCommand
 };

@@ -12,15 +12,27 @@ export default class App extends React.Component {
   componentDidMount(){
     document.getElementById('game').addEventListener('cursor', (this.handlePlayerInput.bind(this)));
     document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
+    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
+    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
   }
 
   componentWillUnmount(){
     document.getElementById('game').removeEventListener('cursor', this.handlePlayerInput.bind(this));
     document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
+    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
+    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
   }
 
   handlePlayerInput(e){
     this.game.handlePlayerInput(e.detail);
+  }
+
+  showInventory(){
+    this.game.showInventory();
+  }
+
+  handleItemInteraction(e){
+    this.game.handleItemInteraction(e.detail);
   }
 
   handleInteractionInput(e){

@@ -3,7 +3,7 @@ import GameScene from '../scene/game-scene';
 import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import { ZONES } from '../../../shared/enum';
+import { ITEM_ACTION, ZONES } from '../../../shared/enum';
 
 export default class GameContainer {
   constructor(component) {
@@ -101,8 +101,15 @@ export default class GameContainer {
   }
 
   onPlayerAdd(player){
-    if (_client.auth._id == player.id) {
+    //console.log(this.room.sessionId);
+    if (player.id == this.room.sessionId) {
       this.player = player;
+      this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
+      this.player.inventory.slots.onRemove = (item, key) => this.onInventoryRemove(key);
+      this.player.inventory.slots.onChange = ((changes) => {
+        changes.forEach((item) => this.onInventoryChange(change, item));
+      });
+  
     }
     player.onChange = ((changes) => {
       changes.forEach((change) => this.handlePlayerChange(change, player));
@@ -111,8 +118,26 @@ export default class GameContainer {
     this.handlePlayerAdd(player);
   }
 
+  onInventoryAdd(item){
+    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
+      this.game.scene.getScene('ui-scene').addItem(item);
+    }
+  }
+
+  onInventoryRemove(key){
+    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
+      this.game.scene.getScene('ui-scene').removeItem(key);
+    }
+  }
+
+  onInventoryChange(change, item){
+    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
+      this.game.scene.getScene('ui-scene').handleInventoryChange(change, item);
+    }
+  }
+
   onPlayerRemove(player, key){
-    if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
+    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.removePlayer(key);
     }
   }
@@ -145,11 +170,9 @@ export default class GameContainer {
   handleDialog(message){
     this.game.scene.getScene('ui-scene').renderDialog(message.nickName, message.speech);
   }
-
   
   handleBerryInteraction(message){ 
     let berry = this.room.state.berries.get(message.id);
-    console.log(berry);
     this.game.scene.getScene('ui-scene').renderDialog('', berry.dialog);
   }
 
@@ -167,5 +190,21 @@ export default class GameContainer {
   } catch (e) {
     console.error("join error", e);
     alert("error");
+  }
+
+  showInventory(){
+    //console.log(this.player.inventory);
+    this.game.scene.getScene('ui-scene').renderInventory(this.player.inventory);
+  }
+
+  handleItemInteraction(message){
+    switch (message.action) {
+      case ITEM_ACTION.USE:
+        this.room.send('item-use', {id: message.id});
+        break;
+    
+      default:
+        break;
+    }
   }
 }
