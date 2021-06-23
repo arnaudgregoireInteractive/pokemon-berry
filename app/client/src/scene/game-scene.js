@@ -35,8 +35,8 @@ export default class GameScene extends Scene {
     });
 
     this.animationManager = new AnimationManager(this);
-    this.playerManager = new PlayerManager(this);
-    this.berryManager = new BerryManager(this);
+    this.playerManager = new PlayerManager(this, this.players);
+    this.berryManager = new BerryManager(this, this.berries);
     this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -57,6 +57,7 @@ export default class GameScene extends Scene {
     this.zone = room.state.zone;
     this.players = room.state.players;
     this.sessionId = room.sessionId;
+    this.berries = room.state.berries;
   }
 
   update(){

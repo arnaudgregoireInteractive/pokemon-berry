@@ -2,9 +2,16 @@ import Berry from '../gameObject/berry';
 import { TILESET_PIXEL } from '../../../shared/enum';
 
 export default class BerryManager{
-    constructor(scene){
+    constructor(scene, berries){
         this.scene = scene;
         this.group = this.scene.add.group();
+        this.buildBerries(berries);
+    }
+
+    buildBerries(berries){
+        berries.forEach(berry=>{
+            this.addBerry(berry);
+        })
     }
 
     addBerry(berry){

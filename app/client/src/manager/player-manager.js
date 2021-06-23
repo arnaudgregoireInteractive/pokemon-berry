@@ -2,10 +2,17 @@ import Player from '../gameObject/player';
 import {TILESET_PIXEL, STATUS} from '../../../shared/enum';
 
 export default class PlayerManager{
-    constructor(scene){
+    constructor(scene, players){
         this.scene = scene;
         this.group = this.scene.add.group();
         this.player = undefined;
+        this.buildPlayers(players);
+    }
+
+    buildPlayers(players){
+        players.forEach(player =>{
+            this.addPlayer(player);
+        });
     }
 
     addPlayer(player){

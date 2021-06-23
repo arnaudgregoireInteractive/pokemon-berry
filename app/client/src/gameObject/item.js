@@ -49,7 +49,7 @@ export default class Item extends GameObjects.Container {
     });
 
     this.scene.input.on('dragend', function (pointer, gameObject, dropped) {
-
+        console.log('dragend');
         if (!dropped)
         {
             gameObject.x = gameObject.input.dragStartX;
