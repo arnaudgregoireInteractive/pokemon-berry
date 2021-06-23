@@ -29,7 +29,17 @@ export default class Inventory extends GameObjects.Container {
 
   
      handleInventoryChange(change, item){
-
+        let phaserItem = this.items.get(item.id);
+        if(phaserItem){
+            switch (change.field) {
+                case 'quantity':
+                    phaserItem.quantity.setText(change.value);
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
 
     addItem(item){

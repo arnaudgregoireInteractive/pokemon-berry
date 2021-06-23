@@ -106,10 +106,6 @@ export default class GameContainer {
       this.player = player;
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
       this.player.inventory.slots.onRemove = (item, key) => this.onInventoryRemove(key);
-      this.player.inventory.slots.onChange = ((changes) => {
-        changes.forEach((item) => this.onInventoryChange(change, item));
-      });
-  
     }
     player.onChange = ((changes) => {
       changes.forEach((change) => this.handlePlayerChange(change, player));
@@ -119,6 +115,10 @@ export default class GameContainer {
   }
 
   onInventoryAdd(item){
+    item.onChange = ((changes) => {
+      changes.forEach((change) => this.onInventoryChange(change, item));
+    });
+
     if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
       this.game.scene.getScene('ui-scene').addItem(item);
     }

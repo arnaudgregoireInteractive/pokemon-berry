@@ -9,8 +9,10 @@ export default class Item extends GameObjects.Container {
     this.setSize(width, height);
     this.id = item.id;
     this.add(new GameObjects.Image(scene, 0 ,0 , 'berries', `${item.type}/thumbnail`));
+    
     if(item.quantity){
-        this.add(new GameObjects.Text(scene, 0, 0, item.quantity, {fontFamily: 'Verdana', color: '#000000'}));
+        this.quantity = new GameObjects.Text(scene, 0, 0, item.quantity, {fontFamily: 'Verdana', color: '#000000'});
+        this.add(this.quantity);
     }
     this.initializeInteractive();
     scene.add.existing(this);
@@ -49,7 +51,6 @@ export default class Item extends GameObjects.Container {
     });
 
     this.scene.input.on('dragend', function (pointer, gameObject, dropped) {
-        console.log('dragend');
         if (!dropped)
         {
             gameObject.x = gameObject.input.dragStartX;

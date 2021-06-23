@@ -13,6 +13,9 @@ class Inventory extends Schema {
     });
     this.slots = new schema.MapSchema();
     this.addItem(BERRY_TYPE.CHERI_BERRY, true);
+    this.addItem(BERRY_TYPE.CHERI_BERRY, true);
+    this.addItem(BERRY_TYPE.CHESTO_BERRY, true);
+    this.addItem(BERRY_TYPE.PECHA_BERRY, true);
     }
 
     removeItem(item){
