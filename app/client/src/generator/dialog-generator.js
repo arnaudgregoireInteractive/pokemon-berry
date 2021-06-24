@@ -5,10 +5,7 @@ const COLOR_DARK = 0x000000;
 
 export default class DialogGenerator{
 
-    static createTextBox(scene, x, y, config){
-        var wrapWidth = GetValue(config, 'wrapWidth', 0);
-        var fixedWidth = GetValue(config, 'fixedWidth', 0);
-        var fixedHeight = GetValue(config, 'fixedHeight', 0);
+    static createTextBox(scene, x, y, actions){
         var textBox = scene.rexUI.add.textBox({
                 x: x,
                 y: y,
@@ -19,7 +16,7 @@ export default class DialogGenerator{
                 icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 2, COLOR_DARK),
     
                 // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-                text: DialogGenerator.getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+                text: DialogGenerator.getBBcodeText(scene, 800, 0, 0),
     
                 action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
     
@@ -45,13 +42,15 @@ export default class DialogGenerator{
                 }
                 else if(this.isLastPage){
                     this.destroy();
+                    scene.clearQuestion();
                 }
                  else {
                     this.typeNextPage();
                 }
             }, textBox)
             .on('pageend', function () {
-                if (this.isLastPage) {
+                if (this.isLastPage && actions) {
+                    scene.question = DialogGenerator.createYesNoQuestion(scene, this.x, this.y + this.height, actions);
                 }
     
                 var icon = this.getElement('action').setVisible(true);
@@ -98,5 +97,73 @@ export default class DialogGenerator{
             color: 0x000000
         })
     }
- 
+
+    static createLabel(scene, text) {
+        let label = scene.rexUI.add.label({
+            // width: 40,
+            // height: 40,
+    
+            background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 2, 0x209cee).setStrokeStyle(2, COLOR_LIGHT),
+    
+            text: scene.add.text(0, 0, text, {
+                fontSize: '20px',
+                color: '#000000',
+                fontFamily: 'Verdana'
+            }),
+    
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10
+            }
+        });
+
+        label.setInteractive({cursor:`url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer`});
+        return label;
+    }
+
+    static createYesNoQuestion(scene, x, y, acts){
+        return scene.rexUI.add.dialog({
+            x: x,
+            y: y,
+
+            background: scene.rexUI.add.roundRectangle(0, 0, 100, 100, 2, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
+
+            actions: function(){
+                let phaserActions = [];
+                acts.forEach(a => {
+                    phaserActions.push(DialogGenerator.createLabel(scene,a));
+                });
+                return phaserActions;
+            }(),
+
+            space: {
+                title: 25,
+                content: 25,
+                action: 15,
+
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
+            },
+
+            align: {
+                actions: 'center', // 'center'|'left'|'right'
+            },
+
+            expand: {
+                content: false, // Content is a pure text object
+            }
+        })
+            .setOrigin(0)
+            .layout()
+            // .drawBounds(scene.add.graphics(), 0xff0000)
+            .on('button.click', function (button, groupName, index) {
+                document.getElementById('game').dispatchEvent(new CustomEvent("action", {detail: {"type": acts[index]}}));
+                scene.clearUI();
+            }, scene)
+            .popUp(1000);
+    }
 }

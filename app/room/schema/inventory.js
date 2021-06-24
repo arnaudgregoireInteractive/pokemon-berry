@@ -38,7 +38,7 @@ class Inventory extends Schema {
             slot.quantity += 1;
         }
         else{
-            let index = this.slots.size;
+            let index = this.getFirstAvailableIndex();
             let item;
             if(stackable){
                 item = new StackableBerry(type, index, 1);
@@ -48,6 +48,22 @@ class Inventory extends Schema {
             }
             this.slots.set(item.id, item);
         }
+    }
+
+    getFirstAvailableIndex(){
+        let indexNonAvailable = [];
+        let index = 0;
+        this.slots.forEach(slot =>{
+            indexNonAvailable.push(slot.index);
+        });
+        for (let i = 0; i < this.capacity; i++) {
+            if(!indexNonAvailable.includes(i)){
+                index = i;
+                break;
+            }
+            
+        }
+        return index;
     }
 
     getSlotByIndex(index){

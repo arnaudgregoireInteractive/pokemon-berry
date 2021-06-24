@@ -1,6 +1,6 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
-const {ORIENTATION, STATUS, KEY_STATUS, BERRY_TYPE, BERRY_NAME } = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS } = require('../../shared/enum');
 const Berry = require('../schema/berry');
 
 class OnJoinCommand extends Command {
@@ -24,6 +24,33 @@ class OnCursorCommand extends Command{
 class OnMessageCommand extends Command{
   execute({client, message}){
     this.state.addMessage(client.sessionId, message.payload);
+  }
+}
+
+class OnActionCommand extends Command{
+  execute({client, message}){
+    let player = this.state.players.get(client.sessionId);
+    let desiredPosition = this.state.getDesiredPosition(player);
+
+    switch (message.type) {
+      case ACTION_TYPE.HARVEST:
+        this.harvest(player, desiredPosition);
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  harvest(player, desiredPosition){
+    let berry = this.state.checkBerry(desiredPosition);
+    if(berry){
+      if(berry.status == BERRY_STATUS.BERRY){
+        player.inventory.addItem(berry.type, true);
+      }
+      player.inventory.addItem(berry.type, true);
+      this.state.berries.delete(berry.id);
+    }
   }
 }
 
@@ -142,5 +169,6 @@ module.exports = {
   OnCursorCommand: OnCursorCommand,
   OnMessageCommand: OnMessageCommand,
   OnInteractionCommand: OnInteractionCommand,
-  OnItemUseCommand: OnItemUseCommand
+  OnItemUseCommand: OnItemUseCommand,
+  OnActionCommand: OnActionCommand
 };

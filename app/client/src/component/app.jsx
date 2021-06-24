@@ -14,6 +14,7 @@ export default class App extends React.Component {
     document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
     document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
     document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
+    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
   }
 
   componentWillUnmount(){
@@ -21,6 +22,7 @@ export default class App extends React.Component {
     document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
     document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
     document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
+    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
   }
 
   handlePlayerInput(e){
@@ -33,6 +35,10 @@ export default class App extends React.Component {
 
   handleItemInteraction(e){
     this.game.handleItemInteraction(e.detail);
+  }
+
+  handleAction(e){
+    this.game.handleAction(e.detail);
   }
 
   handleInteractionInput(e){

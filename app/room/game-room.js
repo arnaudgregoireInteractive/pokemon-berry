@@ -2,7 +2,7 @@ const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
-const {OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand} = require("./command/game-command");
+const {OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand} = require("./command/game-command");
 
 class GameRoom extends colyseus.Room {
 
@@ -39,6 +39,13 @@ class GameRoom extends colyseus.Room {
 
     this.onMessage("interaction",(client, message) =>{
       this.dispatcher.dispatch(new OnInteractionCommand(), {
+        client,
+        message
+      });
+    });
+
+    this.onMessage("action",(client, message) =>{
+      this.dispatcher.dispatch(new OnActionCommand(), {
         client,
         message
       });

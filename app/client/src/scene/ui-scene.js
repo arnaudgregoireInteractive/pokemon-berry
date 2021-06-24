@@ -15,6 +15,7 @@ export default class UIScene extends Scene {
 
   create() {
     this.dialog = undefined;
+    this.question = undefined;
     this.inventory = undefined;
     this.iKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
   }
@@ -25,16 +26,40 @@ export default class UIScene extends Scene {
     }
   }
 
-  renderDialog(nickName, speech){
-    if(this.dialog !== undefined){
-        this.dialog.destroy();
-        this.dialog = undefined;
+  renderDialog(nickName, speech, actions){
+    if(this.dialog || this.question){
+      this.clearDialog();
+      this.clearQuestion();
     }
     else{
-        this.dialog = DialogGenerator.createTextBox(this, 450, 500, {
-            wrapWidth: 800,
-        })
-        .start(`${nickName} : ${speech}`, 20);
+      let message;
+      if(nickName != ''){
+        message = `${nickName} : ${speech}`;
+      }
+      else{
+        message = speech;
+      }
+      this.dialog = DialogGenerator.createTextBox(this, this.cameras.main.centerX -200, this.cameras.main.centerY + 100, actions)
+      .start(message, 20);
+    }
+  }
+
+  clearUI(){
+    this.clearQuestion();
+    this.clearDialog();
+  }
+
+  clearQuestion(){
+    if(this.question){
+      this.question.destroy();
+      this.question = undefined;
+    }
+  }
+
+  clearDialog(){
+    if(this.dialog){
+      this.dialog.destroy();
+      this.dialog = undefined;
     }
   }
 

@@ -3,7 +3,7 @@ import GameScene from '../scene/game-scene';
 import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import { ITEM_ACTION, ZONES } from '../../../shared/enum';
+import { ITEM_ACTION, ZONES, ACTION_TYPE } from '../../../shared/enum';
 
 export default class GameContainer {
   constructor(component) {
@@ -57,8 +57,8 @@ export default class GameContainer {
       this.room.state.players.onAdd = (player) => this.onPlayerAdd(player);
       this.room.state.players.onRemove = (player, key) => this.onPlayerRemove(player, key);
 
-      this.room.state.berries.onAdd = (player) => this.onBerryAdd(player);
-      this.room.state.berries.onRemove = (player, key) => this.onBerryRemove(player);
+      this.room.state.berries.onAdd = (berry) => this.onBerryAdd(berry);
+      this.room.state.berries.onRemove = (berry, key) => this.onBerryRemove(berry, key);
 
       this.room.state.messages.onAdd = this.component.refs.chat.receiveMessage;
       
@@ -144,6 +144,9 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
+    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
+      this.game.scene.getScene('ui-scene').clearUI();
+    }
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
@@ -167,13 +170,17 @@ export default class GameContainer {
     this.room.send('message', {payload : message});
   }
 
+  handleAction(message){
+    this.room.send('action', message);    
+  }
+
   handleDialog(message){
     this.game.scene.getScene('ui-scene').renderDialog(message.nickName, message.speech);
   }
   
   handleBerryInteraction(message){ 
     let berry = this.room.state.berries.get(message.id);
-    this.game.scene.getScene('ui-scene').renderDialog('', berry.dialog);
+    this.game.scene.getScene('ui-scene').renderDialog('', berry.dialog, [ACTION_TYPE.HARVEST]);
   }
 
   handleLink(message){
