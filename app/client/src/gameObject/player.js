@@ -1,5 +1,5 @@
 import {GameObjects} from 'phaser';
-import { TILESET_PIXEL } from '../../../shared/enum';
+import { TILESET_PIXEL, ORIENTATION_TABLE } from '../../../shared/enum';
 
 export default class Player extends GameObjects.Container {
   constructor(scene, player) {
@@ -13,7 +13,8 @@ export default class Player extends GameObjects.Container {
       speed: 58,
       rotateToTarget: false
     });
-    this.sprite = new GameObjects.Sprite(scene,0,0,'hero','0/0/1');
+    
+    this.sprite = new GameObjects.Sprite(scene,0,0,'hero',`0/${ORIENTATION_TABLE[this.orientation]}/1`);
     this.scene.add.existing(this.sprite);
     this.add(this.sprite);
     scene.add.existing(this);

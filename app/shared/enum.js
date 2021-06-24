@@ -16,6 +16,13 @@ const ORIENTATION = Object.freeze({
     DOWN: "DOWN"
 });
 
+const ORIENTATION_TABLE = {
+    'DOWN': 0,
+    'LEFT': 2,
+    'UP': 4,
+    'RIGHT': 2
+};
+
 const STATUS = Object.freeze({
     IDLE: "IDLE",
     MOVING: "MOVING",
@@ -72,4 +79,4 @@ const ITEM_ACTION = Object.freeze({
     USE: 'USE'
 });
 
-module.exports = {ITEM_ACTION, ZONES, TILESET_PIXEL, ORIENTATION, STATUS, KEY_STATUS, NPC_ID, NPC_TYPE, BERRY_TYPE, BERRY_NAME, BERRY_STATUS};
+module.exports = {ORIENTATION_TABLE, ITEM_ACTION, ZONES, TILESET_PIXEL, ORIENTATION, STATUS, KEY_STATUS, NPC_ID, NPC_TYPE, BERRY_TYPE, BERRY_NAME, BERRY_STATUS};

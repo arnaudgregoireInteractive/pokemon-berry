@@ -1,14 +1,8 @@
-import {BERRY_STATUS, BERRY_TYPE, STATUS} from '../../../shared/enum';
+import {BERRY_STATUS, BERRY_TYPE, STATUS, ORIENTATION_TABLE} from '../../../shared/enum';
 
 export default class AnimationManager {
   constructor(scene) {
     this.scene = scene;
-    this.orientationTable = {
-      'DOWN': 0,
-      'LEFT': 2,
-      'UP': 4,
-      'RIGHT': 2
-    };
 
     this.flipxTable = {
       'LEFT': false,
@@ -73,10 +67,10 @@ export default class AnimationManager {
   getSpriteKey(entity) {
       switch (entity.status) {
             case STATUS.IDLE:
-                return `hero/0/${this.orientationTable[entity.orientation]}`;
+                return `hero/0/${ORIENTATION_TABLE[entity.orientation]}`;
         
             case STATUS.MOVING:
-                return `hero/1/${this.orientationTable[entity.orientation]}`;
+                return `hero/1/${ORIENTATION_TABLE[entity.orientation]}`;
       
           default:
               return;
