@@ -144,9 +144,6 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
-    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
-      this.game.scene.getScene('ui-scene').clearUI();
-    }
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
