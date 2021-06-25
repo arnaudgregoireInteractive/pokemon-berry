@@ -68,7 +68,7 @@ class Inventory extends Schema {
 
     getSlotByIndex(index){
         let slot;
-        this.slots.forEach(slot =>{
+        this.slots.forEach(s =>{
             if(s.index == index){
                 slot = s;
             }

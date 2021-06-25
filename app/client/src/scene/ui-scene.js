@@ -49,6 +49,13 @@ export default class UIScene extends Scene {
     this.clearDialog();
   }
 
+  clearInventory(){
+    if(this.inventory){
+        this.inventory.items.forEach(item =>{ item.destroy()});
+        this.inventory.items.clear();
+    }
+  }
+
   clearQuestion(){
     if(this.question){
       this.question.destroy();

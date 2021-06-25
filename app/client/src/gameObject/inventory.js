@@ -26,7 +26,6 @@ export default class Inventory extends GameObjects.Container {
             this.addItem(item);
         });
     }
-
   
      handleInventoryChange(change, item){
         let phaserItem = this.items.get(item.id);
@@ -36,6 +35,11 @@ export default class Inventory extends GameObjects.Container {
                     phaserItem.quantity.setText(change.value);
                     break;
             
+                case 'index':
+                    phaserItem.index = change.value;
+                    phaserItem.x = -70 + 35 * (phaserItem.index % 5);
+                    phaserItem.y = -140 + 35 * Math.floor(phaserItem.index / 5);
+
                 default:
                     break;
             }
@@ -43,9 +47,11 @@ export default class Inventory extends GameObjects.Container {
     }
 
     addItem(item){
-        let phaserItem = new Item(this.scene, item);
-        this.items.set(phaserItem.id, phaserItem);
-        this.add(phaserItem);
+        if(!this.items.get(item.id)){
+            let phaserItem = new Item(this.scene, item);
+            this.items.set(phaserItem.id, phaserItem);
+            this.add(phaserItem);
+        }
     }
 
     removeItem(key){

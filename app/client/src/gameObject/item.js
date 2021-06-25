@@ -8,6 +8,7 @@ export default class Item extends GameObjects.Container {
     let height = 30;
     this.setSize(width, height);
     this.id = item.id;
+    console.log(item.type);
     this.add(new GameObjects.Image(scene, 0 ,0 , 'berries', `${item.type}/thumbnail`));
     
     if(item.quantity){
@@ -47,7 +48,10 @@ export default class Item extends GameObjects.Container {
     this.scene.input.on('drop', function (pointer, gameObject, dropZone) {
         gameObject.x = dropZone.parentContainer.x;
         gameObject.y = dropZone.parentContainer.y;
-
+        document.getElementById('game').dispatchEvent(new CustomEvent("move-item", {detail: {
+          id: gameObject.id,
+          index: dropZone.parentContainer.index
+        }}));
     });
 
     this.scene.input.on('dragend', function (pointer, gameObject, dropped) {

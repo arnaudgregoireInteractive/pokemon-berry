@@ -161,6 +161,28 @@ class OnItemUseCommand extends Command{
   }
 }
 
+class OnItemMoveCommand extends Command{
+  execute({client, message}){
+    let player = this.state.players.get(client.sessionId);
+    let item = player.inventory.slots.get(message.id);
+    let possibleItemOnWantedSlot = player.inventory.getSlotByIndex(message.index);
+    if(item){
+      if(possibleItemOnWantedSlot){
+        this.swap(item, possibleItemOnWantedSlot);
+      }
+      else{
+        item.index = message.index;
+      }
+    }
+  }
+
+  swap(item1, item2){
+    let temp = item1.index;
+    item1.index = item2.index;
+    item2.index = temp;
+  }
+}
+
 
 module.exports = {
   OnJoinCommand: OnJoinCommand,
@@ -170,5 +192,6 @@ module.exports = {
   OnMessageCommand: OnMessageCommand,
   OnInteractionCommand: OnInteractionCommand,
   OnItemUseCommand: OnItemUseCommand,
-  OnActionCommand: OnActionCommand
+  OnActionCommand: OnActionCommand,
+  OnItemMoveCommand: OnItemMoveCommand
 };

@@ -144,6 +144,11 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
+    if(this.room.sessionId == player.id){
+      if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
+        this.game.scene.getScene('ui-scene').clearUI();
+      }
+    }
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
@@ -169,6 +174,10 @@ export default class GameContainer {
 
   handleAction(message){
     this.room.send('action', message);    
+  }
+
+  handleItemMove(message){
+    this.room.send('item-move', message);
   }
 
   handleDialog(message){
