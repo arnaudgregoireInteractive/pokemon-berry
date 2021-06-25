@@ -3,6 +3,7 @@ const command = require("@colyseus/command");
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
 const {OnItemMoveCommand, OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand} = require("./command/game-command");
+const admin = require('firebase-admin');
 
 class GameRoom extends colyseus.Room {
 
@@ -96,6 +97,15 @@ class GameRoom extends colyseus.Room {
        consented
     });
   }
+
+  async onAuth(client, options) {
+    // verify token authenticity
+    const token = await admin.auth().verifyIdToken(options.idToken);
+    const user = await admin.auth().getUser(token.uid);
+    //console.log(user);
+    return user;
+  }
+
 
   onDispose() {
     this.dispatcher.stop();

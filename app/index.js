@@ -1,13 +1,33 @@
+require('dotenv').config();
 const { join } = require('path');
 const { createServer } = require('http');
 const express = require('express');
 const helmet = require('helmet');
 const { Server } = require('colyseus');
+const admin = require('firebase-admin');
 
 const port = Number(process.env.PORT) || 9000;
 const app = express();
 const httpServer = createServer(app);
 const gameServer = new Server({ server: httpServer });
+
+const firebaseKey = {
+  "type": process.env.TYPE,
+  "project_id": process.env.PROJECT_ID,
+  "private_key_id": process.env.PRIVATE_KEY_ID,
+  "private_key": process.env.PRIVATE_KEY,
+  "client_email": process.env.CLIENT_EMAIL,
+  "client_id": process.env.CLIENT_ID,
+  "auth_uri": process.env.AUTH_URI,
+  "token_uri": process.env.TOKEN_URI,
+  "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
+  "client_x509_cert_url": process.env.CLIENT_X509_CERT_URL
+}
+
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseKey),
+  databaseURL: "https://pokemon-berry-default-rtdb.europe-west1.firebasedatabase.app/"
+});
 
 //console.log(process.env);
 // Express middleware

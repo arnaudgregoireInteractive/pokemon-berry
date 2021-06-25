@@ -4,6 +4,9 @@ import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import { ITEM_ACTION, ZONES, ACTION_TYPE } from '../../../shared/enum';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 
 export default class GameContainer {
   constructor(component) {
@@ -17,7 +20,8 @@ export default class GameContainer {
 
   initialize(){
     try {
-      window._client.joinOrCreate(ZONES.PALLET_TOWN, {/* options */}).then(room=>{
+      firebase.auth().currentUser.getIdToken().then(token =>{
+        window._client.joinOrCreate(ZONES.PALLET_TOWN, {idToken: token}).then(room=>{
           this.room = room;
           this.initializeEvents();
           this.room.onStateChange.once((state) =>{
@@ -46,6 +50,7 @@ export default class GameContainer {
             this.game.scene.start('ui-scene');
           });
         });
+      });
     } catch (e) {
       console.error("join error", e);
       alert("error");

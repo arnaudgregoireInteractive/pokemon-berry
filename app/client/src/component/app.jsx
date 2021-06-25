@@ -1,78 +1,26 @@
-import React from 'react';
-import GameContainer from '../game/game-container';
-import Chat from './chat/chat';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Game from './pages/game/game';
+import Home from './pages/home';
+import Auth from './pages/auth';
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.container = React.createRef();
-    this.game = new GameContainer(this);
-  }
-
-  componentDidMount(){
-    document.getElementById('game').addEventListener('cursor', (this.handlePlayerInput.bind(this)));
-    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
-    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
-    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
-    document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
-    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
-  }
-
-  componentWillUnmount(){
-    document.getElementById('game').removeEventListener('cursor', this.handlePlayerInput.bind(this));
-    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
-    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
-    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
-    document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
-    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
-  }
-
-  handlePlayerInput(e){
-    this.game.handlePlayerInput(e.detail);
-  }
-
-  handleItemMove(e){
-    this.game.handleItemMove(e.detail);
-  }
-
-  showInventory(){
-    this.game.showInventory();
-  }
-
-  handleItemInteraction(e){
-    this.game.handleItemInteraction(e.detail);
-  }
-
-  handleAction(e){
-    this.game.handleAction(e.detail);
-  }
-
-  handleInteractionInput(e){
-    this.game.handleInteractionInput();
-  }
-
-  sendMessage(newMessage){
-    this.game.sendMessage(newMessage);
-  }
-  
-  handleSubmit (e) {
-    e.preventDefault()
-    this.game.sendMessage(this.refs.chat.state.currentText);
-    this.refs.chat.setState({currentText: ""});
-  }
-
-  receiveMessage (message) {
-    this.setState({messages :this.state.messages.concat({name: message.name, payload: message.payload})});
-  }
-
+class App extends Component {
   render() {
-    return (
+    const App = () => (
       <div>
-        <main style={{display:'flex'}}>
-          <div id="game" ref={this.container}></div>
-          <Chat ref="chat" receiveMessage={this.receiveMessage} handleSubmit={this.handleSubmit.bind(this)}/>
-        </main>
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path='/auth' component={Auth}/>
+          <Route path='/game' component={Game}/>
+        </Switch>
       </div>
+    )
+    return (
+      <Switch>
+        <App/>
+      </Switch>
     );
   }
 }
+
+export default App;
