@@ -15,7 +15,9 @@ export default class BerryManager{
     }
 
     addBerry(berry){
-        this.group.add(new Berry(this.scene, berry));
+        let phaserBerry = new Berry(this.scene, berry);
+        this.group.add(phaserBerry);
+        this.scene.animationManager.animateBerry(phaserBerry);
     }
 
     removeBerry(id){
