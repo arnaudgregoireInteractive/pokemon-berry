@@ -198,13 +198,15 @@ export default class GameContainer {
     //console.log('handle link', message.to);
     this.room.removeAllListeners();
     this.room.leave();
-    window._client.joinOrCreate(message.to, {from: message.from}).then(room=>{
+    firebase.auth().currentUser.getIdToken().then(token =>{
+      window._client.joinOrCreate(message.to, {from: message.from, idToken: token}).then(room=>{
       this.room = room;
       this.initializeEvents();
       this.room.onStateChange.once((state) =>{
         this.game.scene.getScene('game-scene').scene.restart(room);
       });
     });
+  });
   } catch (e) {
     console.error("join error", e);
     alert("error");
