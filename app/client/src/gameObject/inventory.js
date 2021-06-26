@@ -4,7 +4,8 @@ import ItemPlaceHolder from './item-place-holder';
 
 export default class Inventory extends GameObjects.Container {
   constructor(scene, inventory) {
-        super(scene, 1600, 300);
+        console.log(scene.sys.canvas);
+        super(scene, 6*scene.sys.canvas.width /7, scene.sys.canvas.height/3);
         let width = 200;
         let height = 400;
         this.setSize(width, height);
