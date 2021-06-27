@@ -3,19 +3,23 @@ const { BERRY_TYPE } = require('../../shared/enum');
 const Schema = schema.Schema;
 const Item = require('./item');
 const StackableBerry = require('./stackable-berry');
-const StackableItem = require('./stackable-item');
+const uniqid = require('uniqid');
 
 class Inventory extends Schema {
-  constructor(capacity) {
+  constructor(capacity, items) {
     super();
     this.assign({
         capacity: capacity
     });
     this.slots = new schema.MapSchema();
-    this.addItem(BERRY_TYPE.CHERI_BERRY, true);
-    this.addItem(BERRY_TYPE.CHERI_BERRY, true);
-    this.addItem(BERRY_TYPE.CHESTO_BERRY, true);
-    this.addItem(BERRY_TYPE.PECHA_BERRY, true);
+    if(items){
+        items.forEach(item =>{
+            if(item.quantity){
+                let b = new StackableBerry(item.id, item.type, item.index, item.quantity);
+                this.slots.set(b.id, b);
+            }
+        });
+    }
     }
 
     removeItem(item){
@@ -41,10 +45,10 @@ class Inventory extends Schema {
             let index = this.getFirstAvailableIndex();
             let item;
             if(stackable){
-                item = new StackableBerry(type, index, 1);
+                item = new StackableBerry(uniqid('berryStack-'), type, index, 1);
             }
             else{
-                item = new Item(type, index);
+                item = new Item(uniqid('item-'),type, index);
             }
             this.slots.set(item.id, item);
         }
@@ -84,6 +88,20 @@ class Inventory extends Schema {
             }
         });
         return slot;
+    }
+
+    save(){
+        let slots = [];
+        this.slots.forEach(slot=>{
+            slots.push(
+                {
+                    id: slot.id,
+                    type: slot.type,
+                    index: slot.index,
+                    quantity: slot.quantity
+            });
+        });
+        return slots;
     }
 }
 

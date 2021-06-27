@@ -3,6 +3,9 @@ import PlayerManager from '../manager/player-manager';
 import {ORIENTATION, KEY_STATUS, ZONES, NPC_ID} from '../../../shared/enum';
 import AnimationManager from '../manager/animation-manager';
 import BerryManager from '../manager/berry-manager';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 export default class GameScene extends Scene {
   constructor() {
     super({
@@ -56,7 +59,7 @@ export default class GameScene extends Scene {
     //console.log(room.state.zone);
     this.zone = room.state.zone;
     this.players = room.state.players;
-    this.sessionId = room.sessionId;
+    this.uid = firebase.auth().currentUser.uid;
     this.berries = room.state.berries;
   }
 

@@ -18,7 +18,7 @@ export default class PlayerManager{
     addPlayer(player){
         let phaserPlayer = new Player(this.scene, player);
         this.group.add(phaserPlayer);
-        if(player.id == this.scene.sessionId){
+        if(player.id == this.scene.uid){
             this.player = phaserPlayer;         
             this.scene.cameras.main.startFollow(phaserPlayer, true, 0.08, 0.08);
             this.scene.cameras.main.setZoom(5);

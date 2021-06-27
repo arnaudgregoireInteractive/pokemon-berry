@@ -4,16 +4,18 @@ const {KEY_STATUS} = require('../../shared/enum');
 const Inventory = require('./inventory');
 
 class Player extends Schema {
-  constructor(id, x, y, orientation, status) {
+  constructor(id, zone, name, x, y, orientation, status, inventory) {
     super();
     this.assign({
       id: id,
       x: x,
       y: y,
       orientation:orientation,
-      status:status
+      status:status,
+      name: name,
+      zone: zone
     });
-    this.inventory = new Inventory(50);
+    this.inventory = new Inventory(50, inventory);
     this.moveCooldown = 0;
     this.cursors = {
       LEFT: KEY_STATUS.UP,
@@ -22,10 +24,25 @@ class Player extends Schema {
       DOWN: KEY_STATUS.UP
     };
   }
+
+  save(){
+    return {
+      id:  this.id,
+      zone: this.zone,
+      name: this.name,
+      x: this.x,
+      y: this.y,
+      orientation: this.orientation,
+      status: this.status,
+      inventory: this.inventory.save()
+    }
+  }
 }
 
 schema.defineTypes(Player, {
   id: 'string',
+  zone: 'string',
+  name: 'string',
   x: 'uint8',
   y: 'uint8',
   orientation: 'string',

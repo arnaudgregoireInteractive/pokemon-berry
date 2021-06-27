@@ -7,7 +7,7 @@ const zone = new Schema(
       id: {
         type: String
       },
-      berries: [Berry.schema]
+      berries: [Berry]
     }
 );
 

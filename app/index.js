@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { Server } = require('colyseus');
 const admin = require('firebase-admin');
 const mongoose = require('mongoose');
+const PlayerModel = require('./model/player');
 
 const port = Number(process.env.PORT) || 9000;
 const app = express();
@@ -38,6 +39,18 @@ app.use(express.static(join(__dirname, 'client', 'dist')));
 // Single Page App routing
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'client', 'index.html'));
+});
+
+app.get('/zone', (req, res) => {
+  //console.log(req.query);
+  PlayerModel.findOne({id: req.query.id}).then(doc=>{
+    if(doc){
+      res.json({zone : doc.zone});
+    }
+    else{
+      res.json({zone: ZONES.PALLET_TOWN});
+    }
+  });
 });
 
 // Colyseus room

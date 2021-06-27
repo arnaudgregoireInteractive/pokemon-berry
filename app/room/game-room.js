@@ -1,6 +1,5 @@
 const colyseus = require("colyseus");
 const command = require("@colyseus/command");
-const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
 const {OnDisposeCommand, OnItemMoveCommand, OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand, OnLoadCommand} = require("./command/game-command");
 const admin = require('firebase-admin');
@@ -66,29 +65,9 @@ class GameRoom extends colyseus.Room {
   }
 
   onJoin(client, options) {
-    let x;
-    let y;
-    //console.log(options);
-    if(options.from){
-      let linkStr = `${this.zone}-${options.from}`;
-      //console.log(this.state.data.layers[2].objects);
-      let link = this.state.data.layers[2].objects.find(obj =>{return obj.properties[0].value == linkStr});
-      //console.log(linkStr, link);
-      x = link.x / TILESET_PIXEL;
-      y = link.y / TILESET_PIXEL;
-    }
-    if(x === undefined){
-      x = this.spawnPoint.x/TILESET_PIXEL;
-    }
-    if(y === undefined){
-      y = this.spawnPoint.y/TILESET_PIXEL;
-    }
     this.dispatcher.dispatch(new OnJoinCommand(), {
-        id: client.sessionId,
-        x: x,
-        y: y,
-        orientation: ORIENTATION.DOWN,
-        status: STATUS.IDLE
+      client,
+      options
     });
   }
 

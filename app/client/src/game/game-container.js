@@ -21,35 +21,41 @@ export default class GameContainer {
   initialize(){
     try {
       firebase.auth().currentUser.getIdToken().then(token =>{
-        window._client.joinOrCreate(ZONES.PALLET_TOWN, {idToken: token}).then(room=>{
-          this.room = room;
-          this.initializeEvents();
-          this.room.onStateChange.once((state) =>{
-            this.game = new Phaser.Game({
-              type: Phaser.CANVAS,
-              mode: Phaser.Scale.FIT,
-              width: 1800,
-              height: 900,
-              parent: this.container.current,
-              scene: [GameScene, UIScene],
-              pixelArt: true,
-              plugins: {
-                global: [{
-                  key: 'rexMoveTo',
-                  plugin: MoveToPlugin,
-                  start: true
-                }],
-                scene:[{
-                  key: 'rexUI',
-                  plugin: RexUIPlugin,
-                  mapping: 'rexUI'
-                }]
-              }
-            });
-            this.game.scene.start('game-scene', room);
-            this.game.scene.start('ui-scene');
-          });
-        });
+        fetch(`${window.location.protocol}//${window.location.host}/zone?id=${firebase.auth().currentUser.uid}`)
+        .then((rep)=> {
+          return rep.json();
+        })
+        .then((json)=> {
+          window._client.joinOrCreate(json.zone, {idToken: token}).then(room=>{
+            this.room = room;
+            this.initializeEvents();
+            this.room.onStateChange.once((state) =>{
+              this.game = new Phaser.Game({
+                type: Phaser.CANVAS,
+                mode: Phaser.Scale.FIT,
+                width: 1800,
+                height: 900,
+                parent: this.container.current,
+                scene: [GameScene, UIScene],
+                pixelArt: true,
+                plugins: {
+                  global: [{
+                    key: 'rexMoveTo',
+                    plugin: MoveToPlugin,
+                    start: true
+                  }],
+                  scene:[{
+                    key: 'rexUI',
+                    plugin: RexUIPlugin,
+                    mapping: 'rexUI'
+                  }]
+                }
+              });
+              this.game.scene.start('game-scene', room);
+              this.game.scene.start('ui-scene');
+            })
+          })
+        })
       });
     } catch (e) {
       console.error("join error", e);
@@ -106,8 +112,7 @@ export default class GameContainer {
   }
 
   onPlayerAdd(player){
-    //console.log(this.room.sessionId);
-    if (player.id == this.room.sessionId) {
+    if (player.id == firebase.auth().currentUser.uid) {
       this.player = player;
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
       this.player.inventory.slots.onRemove = (item, key) => this.onInventoryRemove(key);
@@ -149,7 +154,7 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
-    if(this.room.sessionId == player.id){
+    if(firebase.auth().currentUser.uid == player.id){
       if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
         this.game.scene.getScene('ui-scene').clearUI();
       }

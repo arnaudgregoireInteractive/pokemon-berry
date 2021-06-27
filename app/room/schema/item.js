@@ -1,12 +1,11 @@
 const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
-const uniqid = require('uniqid');
 
 class Item extends Schema {
-  constructor(type, index) {
+  constructor(id, type, index) {
     super();
     this.assign({
-      id: uniqid(),
+      id:id,
       type: type,
       index: index,
       stackable: false

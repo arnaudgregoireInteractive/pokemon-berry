@@ -1,12 +1,45 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
-const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS } = require('../../shared/enum');
+const PlayerModel = require('../../model/player');
+const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE } = require('../../shared/enum');
 const Zone = require('../../model/zone');
 const Berry = require('../schema/berry');
+const uniqid = require('uniqid');
+
+class Utils{
+  static savePlayer(client, state){
+    let player = state.players.get(client.auth.uid);
+    return PlayerModel.find({id: player.id}, (err, docs)=>{
+      if(err){
+        console.log(err);
+        return err;
+      }
+      else{
+        if(docs.length == 0){
+          PlayerModel.create(player.save());
+        }
+        else{
+          docs.forEach(doc =>{
+            let save = player.save();
+            doc.id = save.id;
+            doc.x = save.x;
+            doc.y = save.y;
+            doc.orientation = save.orientation;
+            doc.status = save.status;
+            doc.inventory = save.inventory;
+            doc.name = save.name;
+            doc.zone = save.zone;
+            doc.save();
+          }); 
+        }
+      }
+    });
+  }
+}
 
 class OnLoadCommand extends Command{
   execute(){
-    this.room.spawnPoint = this.state.data.layers[2].objects.find(obj=>{return obj.properties[0].value == "SPAWN_POINT"});
+    this.state.spawnPoint = this.state.data.layers[2].objects.find(obj=>{return obj.properties[0].value == "SPAWN_POINT"});
     Zone.find({id: this.room.zone},(err, docs)=>{
       if(err){
         console.log(err);
@@ -26,32 +59,57 @@ class OnLoadCommand extends Command{
 }
 
 class OnJoinCommand extends Command {
-  execute({id,x,y,orientation,status}) {
-    this.state.players[id] = new Player(id, x, y, orientation, status);
+  execute({client, options}) {
+
+    PlayerModel.findOne({id: client.auth.uid}, (err, doc)=>{
+      if(doc){
+        let player = new Player(doc.id, this.state.zone, doc.name, doc.x, doc.y, doc.orientation, doc.status, doc.inventory);
+          this.state.players.set(
+            client.auth.uid,
+            player);
+          
+          if(doc.zone != this.state.zone){
+            let linkStr = `${this.state.zone}-${doc.zone}`;
+            let link = this.state.data.layers[2].objects.find(obj =>{return obj.properties[0].value == linkStr});
+            player.x = link.x / TILESET_PIXEL;
+            player.y = link.y / TILESET_PIXEL;
+          }
+      }
+      else{
+        this.state.players.set(client.auth.uid,
+          new Player(client.auth.uid, this.state.zone, client.auth.displayName, this.state.spawnPoint.x/TILESET_PIXEL, this.state.spawnPoint.y/TILESET_PIXEL, ORIENTATION.DOWN, STATUS.IDLE, [{
+            id: uniqid('berry-'),
+            type: BERRY_TYPE.CHERI_BERRY,
+            index: 0,
+            quantity: 2
+          }]));
+      }
+    });
   }
 }
 
 class OnLeaveCommand extends Command {
   execute({client, consented}) {
-    this.state.players.delete(client.sessionId);
+    Utils.savePlayer(client, this.state);
+    this.state.players.delete(client.auth.uid);
   }
 }
 
 class OnCursorCommand extends Command{
   execute({client, message}){
-    this.state.players.get(client.sessionId).cursors[message.key] = message.input;
+    this.state.players.get(client.auth.uid).cursors[message.key] = message.input;
   }
 }
 
 class OnMessageCommand extends Command{
   execute({client, message}){
-    this.state.addMessage(client.sessionId, message.payload);
+    this.state.addMessage(client.auth.displayName, message.payload);
   }
 }
 
 class OnActionCommand extends Command{
   execute({client, message}){
-    let player = this.state.players.get(client.sessionId);
+    let player = this.state.players.get(client.auth.uid);
     let desiredPosition = this.state.getDesiredPosition(player);
 
     switch (message.type) {
@@ -78,7 +136,7 @@ class OnActionCommand extends Command{
 
 class OnInteractionCommand extends Command{
   execute({client, message}){
-    let player = this.state.players.get(client.sessionId);
+    let player = this.state.players.get(client.auth.uid);
     let desiredPosition = this.state.getDesiredPosition(player);
     let npc = this.state.checkNpc(desiredPosition);
     if(npc){
@@ -129,7 +187,7 @@ class OnUpdateCommand extends Command {
     }
   }
 
-  move(player, direction){
+  async move(player, direction){
     player.orientation = direction;
     let desiredPosition = this.state.getDesiredPosition(player);
 
@@ -140,7 +198,8 @@ class OnUpdateCommand extends Command {
       //console.log('move to', link.properties[0].value);
       let split = link.properties[0].value.split('-');
       //console.log(split);
-      let client = this.room.clients.find(c=>{return c.id == player.id});
+      let client = this.room.clients.find(c=>{return c.auth.uid == player.id});
+      await Utils.savePlayer(client, this.state);
       client.send('link', {from: split[0], to : split[1]});
     }
     if(this.state.checkNpc(desiredPosition)){
@@ -174,7 +233,7 @@ class OnUpdateCommand extends Command {
 
 class OnItemUseCommand extends Command{
   execute({client, message}){
-    let player = this.state.players.get(client.sessionId);
+    let player = this.state.players.get(client.auth.uid);
     let desiredPosition = this.state.getDesiredPosition(player);
     let item = player.inventory.slots.get(message.id);
     if(item && item.use(player, desiredPosition, this.state)){
@@ -185,7 +244,7 @@ class OnItemUseCommand extends Command{
 
 class OnItemMoveCommand extends Command{
   execute({client, message}){
-    let player = this.state.players.get(client.sessionId);
+    let player = this.state.players.get(client.auth.uid);
     let item = player.inventory.slots.get(message.id);
     let possibleItemOnWantedSlot = player.inventory.getSlotByIndex(message.index);
     if(item){

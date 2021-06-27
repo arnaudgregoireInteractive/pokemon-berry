@@ -8,6 +8,7 @@ export default class Player extends GameObjects.Container {
     this.positionX = player.x;
     this.positionY = player.y;
     this.status = player.status;
+    this.name = player.name;
     this.orientation = player.orientation;
     this.moveManager = scene.plugins.get('rexMoveTo').add(this, {
       speed: 58,
@@ -15,6 +16,7 @@ export default class Player extends GameObjects.Container {
     });
     
     this.sprite = new GameObjects.Sprite(scene,0,0,'hero',`0/${ORIENTATION_TABLE[this.orientation]}/1`);
+    this.add(new GameObjects.Text(scene, -20,-20, this.name, {fontFamily: 'Verdana', fontSize: '9px'}));
     this.scene.add.existing(this.sprite);
     this.add(this.sprite);
     scene.add.existing(this);

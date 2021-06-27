@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const berry = new Schema(
+const Berry = new Schema(
     {
       id: {
         type: String
@@ -26,5 +26,4 @@ const berry = new Schema(
     }
 );
 
-const Berry = mongoose.model('Berry', berry);
 module.exports = Berry;

@@ -27,7 +27,7 @@ class Berry extends Schema {
   }
 
   grow(){
-    console.log(this.step, this.status);
+    //console.log(this.step, this.status);
     this.step = Math.max(0, this.step -1);
     if(this.step <= 0){
       this.step = 10;
