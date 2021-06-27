@@ -1,10 +1,9 @@
 const schema = require('@colyseus/schema');
 const {BERRY_NAME, BERRY_STATUS} = require('../../shared/enum');
 const Schema = schema.Schema;
-const uniqid = require('uniqid');
 
 class Berry extends Schema {
-  constructor(type, x, y, ownerId) {
+  constructor(id, type, x, y, ownerId, status, step) {
     super();
     this.descriptions = {
         SEED: `A ${BERRY_NAME[type]} was planted here.`,
@@ -15,19 +14,20 @@ class Berry extends Schema {
     }
 
     this.assign({
-      id: uniqid('berry-'),
+      id: id,
       ownerId: ownerId,
       type: type,
       name: BERRY_NAME[type],
-      status: BERRY_STATUS.SEED,
-      dialog: this.descriptions[BERRY_STATUS.SEED],
+      status: status,
+      dialog: this.descriptions[status],
       x: x,
       y: y,
-      step: 10
+      step: step
     });
   }
 
   grow(){
+    console.log(this.step, this.status);
     this.step = Math.max(0, this.step -1);
     if(this.step <= 0){
       this.step = 10;

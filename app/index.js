@@ -5,6 +5,7 @@ const express = require('express');
 const helmet = require('helmet');
 const { Server } = require('colyseus');
 const admin = require('firebase-admin');
+const mongoose = require('mongoose');
 
 const port = Number(process.env.PORT) || 9000;
 const app = express();
@@ -25,8 +26,7 @@ const firebaseKey = {
 }
 
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseKey),
-  databaseURL: "https://pokemon-berry-default-rtdb.europe-west1.firebasedatabase.app/"
+  credential: admin.credential.cert(firebaseKey)
 });
 
 //console.log(process.env);
@@ -53,7 +53,11 @@ Object.keys(ZONES).forEach(zone => {
   gameServer.define(zone, maclass);
 });
 
-// Start
-gameServer.listen(port).then(() => {
-  console.log(`Game server started, listening on port ${port}`);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then((err) =>{
+  gameServer.listen(port).then(() => {
+    console.log(`Game server started, listening on port ${port}`);
+  });
 });
+// Start
+

@@ -2,7 +2,7 @@ const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const {TILESET_PIXEL, ZONES, ORIENTATION, STATUS} = require('../shared/enum');
 const GameState = require('./state/game-state');
-const {OnItemMoveCommand, OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand} = require("./command/game-command");
+const {OnDisposeCommand, OnItemMoveCommand, OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand, OnLoadCommand} = require("./command/game-command");
 const admin = require('firebase-admin');
 
 class GameRoom extends colyseus.Room {
@@ -12,10 +12,11 @@ class GameRoom extends colyseus.Room {
     this.zone = zone;
   }
 
-  onCreate() {
+  async onCreate() {
     this.dispatcher = new command.Dispatcher(this);
+
     this.setState(new GameState(this.zone));
-    this.spawnPoint = this.state.data.layers[2].objects.find(obj=>{return obj.properties[0].value == "SPAWN_POINT"});
+    this.dispatcher.dispatch(new OnLoadCommand());
 
     this.onMessage("cursor",(client, message) =>{
       this.dispatcher.dispatch(new OnCursorCommand(), {
@@ -99,15 +100,14 @@ class GameRoom extends colyseus.Room {
   }
 
   async onAuth(client, options) {
-    // verify token authenticity
     const token = await admin.auth().verifyIdToken(options.idToken);
     const user = await admin.auth().getUser(token.uid);
-    //console.log(user);
     return user;
   }
 
 
   onDispose() {
+    this.dispatcher.dispatch(new OnDisposeCommand());
     this.dispatcher.stop();
   }
 }

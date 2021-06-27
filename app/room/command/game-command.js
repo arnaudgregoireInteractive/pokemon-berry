@@ -1,7 +1,29 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
 const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS } = require('../../shared/enum');
+const Zone = require('../../model/zone');
 const Berry = require('../schema/berry');
+
+class OnLoadCommand extends Command{
+  execute(){
+    this.room.spawnPoint = this.state.data.layers[2].objects.find(obj=>{return obj.properties[0].value == "SPAWN_POINT"});
+    Zone.find({id: this.room.zone},(err, docs)=>{
+      if(err){
+        console.log(err);
+        return err;
+      }
+      else{
+        //console.log(docs);
+        docs.forEach(doc=>{
+          doc.berries.forEach(b=>{
+            let berry = new Berry(b.id, b.type, b.x, b.y, b.ownerId, b.status, b.step);
+            this.state.berries.set(berry.id, berry);
+          });
+        });
+      }
+    });
+  }
+}
 
 class OnJoinCommand extends Command {
   execute({id,x,y,orientation,status}) {
@@ -183,6 +205,43 @@ class OnItemMoveCommand extends Command{
   }
 }
 
+class OnDisposeCommand extends Command{
+  execute(){
+    let berries = [];
+    this.state.berries.forEach(berry=>{
+      berries.push({
+        id: berry.id,
+        type: berry.type,
+        x: berry.x,
+        y: berry.y,
+        ownerId: berry.ownerId,
+        step: berry.step,
+        status: berry.status
+      });
+    });
+    Zone.find({id: this.room.zone},(err, docs)=>{
+      if(err){
+        console.log(err);
+        return err;
+      }
+      else{
+        if(docs.length == 0){
+          Zone.create({
+            id: this.room.zone,
+            berries: berries
+          });
+        }
+        else{
+          docs.forEach(doc=>{
+            doc.berries = berries;
+            doc.save();
+          });
+        }
+      }
+    });
+  }
+}
+
 
 module.exports = {
   OnJoinCommand: OnJoinCommand,
@@ -193,5 +252,7 @@ module.exports = {
   OnInteractionCommand: OnInteractionCommand,
   OnItemUseCommand: OnItemUseCommand,
   OnActionCommand: OnActionCommand,
-  OnItemMoveCommand: OnItemMoveCommand
+  OnItemMoveCommand: OnItemMoveCommand,
+  OnDisposeCommand: OnDisposeCommand,
+  OnLoadCommand: OnLoadCommand
 };

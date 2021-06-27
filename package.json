@@ -26,6 +26,7 @@
     "firebase": "^8.6.8",
     "firebase-admin": "^9.10.0",
     "helmet": "^4.6.0",
+    "mongoose": "^5.12.15",
     "nes.css": "^2.3.0",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.52",
