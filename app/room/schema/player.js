@@ -4,7 +4,7 @@ const {KEY_STATUS} = require('../../shared/enum');
 const Inventory = require('./inventory');
 
 class Player extends Schema {
-  constructor(id, zone, name, x, y, orientation, status, inventory) {
+  constructor(id, zone, name, x, y, orientation, status, money, inventory) {
     super();
     this.assign({
       id: id,
@@ -13,7 +13,8 @@ class Player extends Schema {
       orientation:orientation,
       status:status,
       name: name,
-      zone: zone
+      zone: zone,
+      money: money
     });
     this.inventory = new Inventory(50, inventory);
     this.moveCooldown = 0;
@@ -34,6 +35,7 @@ class Player extends Schema {
       y: this.y,
       orientation: this.orientation,
       status: this.status,
+      money: this.money,
       inventory: this.inventory.save()
     }
   }
@@ -47,6 +49,7 @@ schema.defineTypes(Player, {
   y: 'uint8',
   orientation: 'string',
   status: 'string',
+  money: 'uint64',
   inventory: Inventory
 });
 

@@ -3,6 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 const configDev = {
   mode: 'development',
+  
   entry: path.resolve(__dirname, 'app', 'client', 'src', 'index.js'),
   watchOptions: {
     aggregateTimeout: 1500,

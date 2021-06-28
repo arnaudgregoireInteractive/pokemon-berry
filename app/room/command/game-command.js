@@ -29,6 +29,7 @@ class Utils{
             doc.inventory = save.inventory;
             doc.name = save.name;
             doc.zone = save.zone;
+            doc.money = save.money;
             doc.save();
           }); 
         }
@@ -63,7 +64,7 @@ class OnJoinCommand extends Command {
 
     PlayerModel.findOne({id: client.auth.uid}, (err, doc)=>{
       if(doc){
-        let player = new Player(doc.id, this.state.zone, doc.name, doc.x, doc.y, doc.orientation, doc.status, doc.inventory);
+        let player = new Player(doc.id, this.state.zone, doc.name, doc.x, doc.y, doc.orientation, doc.status, doc.money, doc.inventory);
           this.state.players.set(
             client.auth.uid,
             player);
@@ -77,7 +78,7 @@ class OnJoinCommand extends Command {
       }
       else{
         this.state.players.set(client.auth.uid,
-          new Player(client.auth.uid, this.state.zone, client.auth.displayName, this.state.spawnPoint.x/TILESET_PIXEL, this.state.spawnPoint.y/TILESET_PIXEL, ORIENTATION.DOWN, STATUS.IDLE, [{
+          new Player(client.auth.uid, this.state.zone, client.auth.displayName, this.state.spawnPoint.x/TILESET_PIXEL, this.state.spawnPoint.y/TILESET_PIXEL, ORIENTATION.DOWN, STATUS.IDLE, 5, [{
             id: uniqid('berry-'),
             type: BERRY_TYPE.CHERI_BERRY,
             index: 0,

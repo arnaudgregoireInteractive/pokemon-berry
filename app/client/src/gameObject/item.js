@@ -8,7 +8,7 @@ export default class Item extends GameObjects.Container {
     let height = 30;
     this.setSize(width, height);
     this.id = item.id;
-    console.log(item.type);
+    //console.log(item.type);
     this.add(new GameObjects.Image(scene, 0 ,0 , 'berries', `${item.type}/thumbnail`));
     
     if(item.quantity){

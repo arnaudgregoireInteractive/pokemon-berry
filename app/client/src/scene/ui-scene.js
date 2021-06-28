@@ -5,12 +5,13 @@ import DialogGenerator from '../generator/dialog-generator';
 export default class UIScene extends Scene {
   constructor() {
     super({
-      key: 'ui-scene'
+      key: 'ui-scene',
+      active: false
     });
   }
 
   preload(){
-    this.load.image('nextPage', 'asset/ui/arrow-down-left.png');
+
   }
 
   create() {
@@ -87,14 +88,21 @@ export default class UIScene extends Scene {
       this.inventory.handleInventoryChange(change, item);
     }
   }
+
+  handleMoneyChange(newValue){
+    if(this.inventory){
+      this.inventory.handleMoneyChange(newValue);
+    }
+  }
   
-  renderInventory(inventory){
+  renderInventory(inventory, money){
+    console.log(money);
     if(this.inventory !== undefined){
       this.inventory.destroy();
       this.inventory = undefined;
     }
     else{
-      this.inventory = new Inventory(this, inventory);
+      this.inventory = new Inventory(this, inventory, money);
     }
   }
 }

@@ -16,6 +16,7 @@ export default class Game extends React.Component {
     document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
     document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
     document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
+    document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
   }
 
   componentWillUnmount(){
@@ -25,6 +26,11 @@ export default class Game extends React.Component {
     document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
     document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
     document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
+    document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
+  }
+
+  startScenes(){
+    this.game.startScenes();
   }
 
   handlePlayerInput(e){

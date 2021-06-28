@@ -15,9 +15,11 @@ export default class BerryManager{
     }
 
     addBerry(berry){
-        let phaserBerry = new Berry(this.scene, berry);
-        this.group.add(phaserBerry);
-        this.scene.animationManager.animateBerry(phaserBerry);
+        if(this.group && this.group.children && !this.isBerry(berry.id)){
+            let phaserBerry = new Berry(this.scene, berry);
+            this.group.add(phaserBerry);
+            this.scene.animationManager.animateBerry(phaserBerry);
+        }
     }
 
     removeBerry(id){
@@ -28,31 +30,43 @@ export default class BerryManager{
         });
     }
 
-    handleBerryChange(berry, change){
-        this.group.getChildren().forEach((p) =>{
-            if(p.id == berry.id){
-                //console.log(change.field, change.value);
-                switch (change.field) {
-                    case 'status':
-                        p.status = change.value;
-                        this.scene.animationManager.animateBerry(p);
-                        break;
-
-                    case 'x':
-                        p.positionX = change.value;
-                        p.setPosition(p.positionX * TILESET_PIXEL +TILESET_PIXEL/2, p.y);
-                        break;
-                    
-                    case 'y':
-                        p.positionY = change.value;
-                        p.setPosition(p.x, p.positionY * TILESET_PIXEL - 6);
-                        break;
-
-                    default:
-                        p[change.field] = change.value;
-                        break;
-                }
+    isBerry(id){
+        let isBerry = false;
+        this.group.getChildren().forEach((berry) => {
+            if (berry.id == id) {
+                isBerry = true;
             }
         });
+        return isBerry;
+    }
+
+    handleBerryChange(berry, change){
+        if(this.group && this.group.children){
+            this.group.getChildren().forEach((p) =>{
+                if(p.id == berry.id){
+                    //console.log(change.field, change.value);
+                    switch (change.field) {
+                        case 'status':
+                            p.status = change.value;
+                            this.scene.animationManager.animateBerry(p);
+                            break;
+    
+                        case 'x':
+                            p.positionX = change.value;
+                            p.setPosition(p.positionX * TILESET_PIXEL +TILESET_PIXEL/2, p.y);
+                            break;
+                        
+                        case 'y':
+                            p.positionY = change.value;
+                            p.setPosition(p.x, p.positionY * TILESET_PIXEL - 6);
+                            break;
+    
+                        default:
+                            p[change.field] = change.value;
+                            break;
+                    }
+                }
+            });
+        }
     }
 }

@@ -16,7 +16,9 @@ export default class Player extends GameObjects.Container {
     });
     
     this.sprite = new GameObjects.Sprite(scene,0,0,'hero',`0/${ORIENTATION_TABLE[this.orientation]}/1`);
-    this.add(new GameObjects.Text(scene, -20,-20, this.name, {fontFamily: 'Verdana', fontSize: '9px'}));
+    let phaserName = new GameObjects.BitmapText(scene, 0,-17, 'atari', this.name, 7);
+    phaserName.setX(phaserName.x - phaserName.width/2);
+    this.add(phaserName);
     this.scene.add.existing(this.sprite);
     this.add(this.sprite);
     scene.add.existing(this);

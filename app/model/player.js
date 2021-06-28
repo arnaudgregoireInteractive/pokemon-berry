@@ -25,6 +25,9 @@ const player = new Schema(
       zone:{
         type: String
       },
+      money:{
+        type: Number
+      },
       inventory: [Item]
     }
 );

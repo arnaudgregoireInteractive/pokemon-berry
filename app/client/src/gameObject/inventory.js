@@ -3,8 +3,8 @@ import Item from './item';
 import ItemPlaceHolder from './item-place-holder';
 
 export default class Inventory extends GameObjects.Container {
-  constructor(scene, inventory) {
-        console.log(scene.sys.canvas);
+  constructor(scene, inventory, money) {
+        //console.log(scene.sys.canvas);
         super(scene, 6*scene.sys.canvas.width /7, scene.sys.canvas.height/3);
         let width = 200;
         let height = 400;
@@ -13,8 +13,10 @@ export default class Inventory extends GameObjects.Container {
         let rectangle = new GameObjects.Rectangle(scene, 0, 0, width, height, 0xffffff, 0.7);
         rectangle.setStrokeStyle(1,0x000000);
         this.add(rectangle);
-        this.add(new GameObjects.Text(scene, -40, -190, 'Inventory',{fontFamily: 'Verdana', color: '#000000'}));
-
+        this.add(new GameObjects.Text(scene, 0, -190, 'Inventory',{fontFamily: 'Verdana', color: '#000000'}));
+        this.money = new GameObjects.Text(scene, -75,-190, money, {fontFamily: 'Verdana', color: '#000000'});
+        this.add(new GameObjects.Image(scene,-60,-190,'money').setScale(0.5,0.5).setOrigin(0,0));
+        this.add(this.money);
         for (let i = 0; i < inventory.capacity; i++) {
             this.add(new ItemPlaceHolder(scene,-70 + 35 * (i % 5),-140 + 35 * Math.floor(i / 5), i));
         }
@@ -26,6 +28,10 @@ export default class Inventory extends GameObjects.Container {
         inventory.slots.forEach(item => {
             this.addItem(item);
         });
+    }
+
+    handleMoneyChange(newValue){
+        this.money.setText(newValue);
     }
   
      handleInventoryChange(change, item){

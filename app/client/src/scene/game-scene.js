@@ -9,22 +9,18 @@ import 'firebase/auth';
 export default class GameScene extends Scene {
   constructor() {
     super({
-      key: 'game-scene'
+      key: 'game-scene',
+      active: false
     });
   }
 
   preload() {
-    this.load.multiatlas('hero', 'asset/atlas/hero.json', 'asset/atlas/');
-    this.load.multiatlas('npcs', 'asset/atlas/npcs.json', 'asset/atlas/');
-    this.load.multiatlas('berries', 'asset/atlas/berries.json', 'asset/atlas');
-    this.load.image('tileset-building', `asset/tileset/tileset-building.png`);
-    this.load.image('tileset-world', `asset/tileset/tileset-world.png`);
-    this.load.tilemapTiledJSON(this.zone, `asset/tilemap/${this.zone}.json`);
+
   }
 
   create() {
     this.map = this.make.tilemap({key: this.zone});
-    console.log(this.zone);
+    //console.log(this.zone);
     this.tilesetWorld = this.map.addTilesetImage('tileset-world', 'tileset-world', 16, 16, 1, 1);
     this.tilesetBuilding = this.map.addTilesetImage('tileset-building', 'tileset-building', 16, 16, 1, 1);
     this.cursors = this.input.keyboard.createCursorKeys();

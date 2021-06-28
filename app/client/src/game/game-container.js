@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import { Game } from 'phaser';
 import GameScene from '../scene/game-scene';
 import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
@@ -6,6 +6,7 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import { ITEM_ACTION, ZONES, ACTION_TYPE } from '../../../shared/enum';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import LoadingScene from '../scene/loading-scene';
 
 
 export default class GameContainer {
@@ -30,13 +31,13 @@ export default class GameContainer {
             this.room = room;
             this.initializeEvents();
             this.room.onStateChange.once((state) =>{
-              this.game = new Phaser.Game({
+              this.game = new Game({
                 type: Phaser.CANVAS,
                 mode: Phaser.Scale.FIT,
                 width: 1800,
                 height: 900,
                 parent: this.container.current,
-                scene: [GameScene, UIScene],
+                scene: [LoadingScene, GameScene, UIScene],
                 pixelArt: true,
                 plugins: {
                   global: [{
@@ -51,8 +52,6 @@ export default class GameContainer {
                   }]
                 }
               });
-              this.game.scene.start('game-scene', room);
-              this.game.scene.start('ui-scene');
             })
           })
         })
@@ -83,6 +82,11 @@ export default class GameContainer {
         this.handleBerryInteraction(message);
       });
     }
+  }
+  
+  startScenes(){
+    this.game.scene.start('game-scene', this.room);
+    this.game.scene.start('ui-scene');
   }
 
   onBerryAdd(berry){
@@ -116,6 +120,13 @@ export default class GameContainer {
       this.player = player;
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
       this.player.inventory.slots.onRemove = (item, key) => this.onInventoryRemove(key);
+      this.player.onChange = ((changes) => {
+        changes.forEach((change) => {
+          if(change.field == 'money' && this.game.scene.getScene('ui-scene')){
+            this.game.scene.getScene('ui-scene').handleMoneyChange(change.value);
+          }
+        });
+      });
     }
     player.onChange = ((changes) => {
       changes.forEach((change) => this.handlePlayerChange(change, player));
@@ -154,11 +165,6 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
-    if(firebase.auth().currentUser.uid == player.id){
-      if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
-        this.game.scene.getScene('ui-scene').clearUI();
-      }
-    }
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
@@ -218,8 +224,7 @@ export default class GameContainer {
   }
 
   showInventory(){
-    //console.log(this.player.inventory);
-    this.game.scene.getScene('ui-scene').renderInventory(this.player.inventory);
+    this.game.scene.getScene('ui-scene').renderInventory(this.player.inventory, this.player.money);
   }
 
   handleItemInteraction(message){
