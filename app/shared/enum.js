@@ -56,7 +56,8 @@ const NPC_ID = Object.freeze({
 });
 
 const NPC_TYPE = Object.freeze({
-    DIALOG: 'DIALOG'
+    DIALOG: 'DIALOG',
+    SELL: 'SELL'
 });
 
 const BERRY_TYPE = Object.freeze({
