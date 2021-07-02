@@ -1,7 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
 const PlayerModel = require('../../model/player');
-const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE } = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE, NPC_TYPE } = require('../../shared/enum');
 const Zone = require('../../model/zone');
 const Berry = require('../schema/berry');
 const uniqid = require('uniqid');
