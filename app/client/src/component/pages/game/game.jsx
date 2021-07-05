@@ -2,6 +2,7 @@ import React from 'react';
 import GameContainer from '../../../game/game-container';
 import Chat from './chat/chat';
 import Inventory from './inventory/inventory';
+import Prompt from './prompt/prompt';
 
 export default class Game extends React.Component {
   constructor() {
@@ -13,7 +14,9 @@ export default class Game extends React.Component {
       currentText: "",
       messages : [],
       inventory: {},
-      inventoryVisible: true
+      inventoryVisible: true,
+      prompt:{},
+      promptVisible: true
     };
   }
 
@@ -63,8 +66,8 @@ export default class Game extends React.Component {
     this.setState({inventory: i});
   }
 
-  handleDialog(message){
-    console.log(message);
+  receivePrompt(p){
+    this.setState({prompt: p});
   }
 
   handleKeyPress(e){
@@ -94,16 +97,21 @@ export default class Game extends React.Component {
       <main style={{display:'flex'}}>
         <div id="game" tabIndex="0" ref={this.container} onClick={this.focusTextInput.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}></div>
         <Chat
-        handleSubmit={this.handleSubmit.bind(this)} 
-        onInputChange={this.onInputChange.bind(this)}
-        currentText={this.state.currentText}
-        messages={this.state.messages}
+          handleSubmit={this.handleSubmit.bind(this)} 
+          onInputChange={this.onInputChange.bind(this)}
+          currentText={this.state.currentText}
+          messages={this.state.messages}
         />
         <Inventory
-        inventory={this.state.inventory}
-        visible={this.state.inventoryVisible}
-        handleItemInput={this.handleItemInput.bind(this)}
+          inventory={this.state.inventory}
+          visible={this.state.inventoryVisible}
+          handleItemInput={this.handleItemInput.bind(this)}
         />
+        <Prompt
+          prompt={this.state.prompt}
+          visible={this.state.promptVisible}
+        />
+
       </main>
     );
   }

@@ -9,7 +9,6 @@ export default class Berry extends GameObjects.Container {
     this.positionX = berry.x;
     this.positionY = berry.y;
     this.status = berry.status;
-    this.dialog = berry.dialog;
     this.name = berry.name;
     this.type = berry.type;
     this.step = berry.step;

@@ -19,7 +19,7 @@ import Draggable from 'react-draggable';
             width: '270px',
             maxHeight: '400px',
             height: '400px',
-            backgroundColor: 'rgba(255, 255, 255, .5)',
+            backgroundColor: 'rgba(255, 255, 255, .6)',
             padding: '0px'
          };
 
@@ -28,7 +28,7 @@ import Draggable from 'react-draggable';
             padding: '0px'
         }
          
-        console.log(this.props.inventory.slots);
+        //console.log(this.props.inventory.slots);
         if(this.props.inventory.slots && this.props.visible){
             return <Draggable>
                 <div className= "nes-container is-rounded" style={inventoryStyle}>

@@ -67,8 +67,8 @@ export default class GameContainer {
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
       });
-      this.room.onMessage("dialog", (message) => {
-        this.component.handleDialog(message);
+      this.room.onMessage("prompt", (message) => {
+        this.component.receivePrompt(message);
       });
     }
   }
@@ -125,8 +125,8 @@ export default class GameContainer {
   }
 
   onInventoryAdd(item){
-    console.log(item);
-    console.log(this.component);
+    //console.log(item);
+    //console.log(this.component);
     item.onChange = this.component.onInventoryChange(this.player.inventory);
     this.component.onInventoryChange(this.player.inventory);
   }
