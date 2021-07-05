@@ -12,6 +12,7 @@ class Inventory extends Schema {
         capacity: capacity
     });
     this.slots = new schema.MapSchema();
+
     if(items){
         items.forEach(item =>{
             if(item.quantity){

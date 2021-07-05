@@ -1,9 +1,6 @@
 import { Game } from 'phaser';
 import GameScene from '../scene/game-scene';
-import UIScene from '../scene/ui-scene';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
-import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import { ITEM_ACTION, ZONES, ACTION_TYPE } from '../../../shared/enum';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import LoadingScene from '../scene/loading-scene';
@@ -37,18 +34,13 @@ export default class GameContainer {
                 width: 1800,
                 height: 900,
                 parent: this.container.current,
-                scene: [LoadingScene, GameScene, UIScene],
+                scene: [LoadingScene, GameScene],
                 pixelArt: true,
                 plugins: {
                   global: [{
                     key: 'rexMoveTo',
                     plugin: MoveToPlugin,
                     start: true
-                  }],
-                  scene:[{
-                    key: 'rexUI',
-                    plugin: RexUIPlugin,
-                    mapping: 'rexUI'
                   }]
                 }
               });
@@ -70,23 +62,20 @@ export default class GameContainer {
       this.room.state.berries.onAdd = (berry) => this.onBerryAdd(berry);
       this.room.state.berries.onRemove = (berry, key) => this.onBerryRemove(berry, key);
 
-      this.room.state.messages.onAdd = this.component.refs.chat.receiveMessage;
+      this.room.state.messages.onAdd = this.component.receiveMessage.bind(this.component);
       
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
       });
       this.room.onMessage("dialog", (message) => {
-        this.handleDialog(message);
-      });
-      this.room.onMessage("berry-interaction", (message) =>{
-        this.handleBerryInteraction(message);
+        this.component.handleDialog(message);
       });
     }
   }
   
   startScenes(){
     this.game.scene.start('game-scene', this.room);
-    this.game.scene.start('ui-scene');
+    //this.game.scene.start('ui-scene');
   }
 
   onBerryAdd(berry){
@@ -119,7 +108,7 @@ export default class GameContainer {
     if (player.id == firebase.auth().currentUser.uid) {
       this.player = player;
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
-      this.player.inventory.slots.onRemove = (item, key) => this.onInventoryRemove(key);
+      this.player.inventory.slots.onRemove = (item, key) => this.component.onInventoryChange(this.player.inventory);
       this.player.onChange = ((changes) => {
         changes.forEach((change) => {
           if(change.field == 'money' && this.game.scene.getScene('ui-scene')){
@@ -136,25 +125,10 @@ export default class GameContainer {
   }
 
   onInventoryAdd(item){
-    item.onChange = ((changes) => {
-      changes.forEach((change) => this.onInventoryChange(change, item));
-    });
-
-    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
-      this.game.scene.getScene('ui-scene').addItem(item);
-    }
-  }
-
-  onInventoryRemove(key){
-    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
-      this.game.scene.getScene('ui-scene').removeItem(key);
-    }
-  }
-
-  onInventoryChange(change, item){
-    if(this.game && this.game.scene && this.game.scene.getScene('ui-scene')){
-      this.game.scene.getScene('ui-scene').handleInventoryChange(change, item);
-    }
+    console.log(item);
+    console.log(this.component);
+    item.onChange = this.component.onInventoryChange(this.player.inventory);
+    this.component.onInventoryChange(this.player.inventory);
   }
 
   onPlayerRemove(player, key){
@@ -184,25 +158,12 @@ export default class GameContainer {
     this.room.send('interaction');
   }
 
+  handleItemInput(id){
+    this.room.send('item-use', {'id': id});
+  }
+
   sendMessage(message){
     this.room.send('message', {payload : message});
-  }
-
-  handleAction(message){
-    this.room.send('action', message);    
-  }
-
-  handleItemMove(message){
-    this.room.send('item-move', message);
-  }
-
-  handleDialog(message){
-    this.game.scene.getScene('ui-scene').renderDialog(message.nickName, message.speech);
-  }
-  
-  handleBerryInteraction(message){ 
-    let berry = this.room.state.berries.get(message.id);
-    this.game.scene.getScene('ui-scene').renderDialog('', berry.dialog, [ACTION_TYPE.HARVEST]);
   }
 
   handleLink(message){
@@ -221,20 +182,5 @@ export default class GameContainer {
   } catch (e) {
     console.error("join error", e);
     alert("error");
-  }
-
-  showInventory(){
-    this.game.scene.getScene('ui-scene').renderInventory(this.player.inventory, this.player.money);
-  }
-
-  handleItemInteraction(message){
-    switch (message.action) {
-      case ITEM_ACTION.USE:
-        this.room.send('item-use', {id: message.id});
-        break;
-    
-      default:
-        break;
-    }
   }
 }

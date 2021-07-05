@@ -23,7 +23,6 @@ export default class GameScene extends Scene {
     //console.log(this.zone);
     this.tilesetWorld = this.map.addTilesetImage('tileset-world', 'tileset-world', 16, 16, 1, 1);
     this.tilesetBuilding = this.map.addTilesetImage('tileset-building', 'tileset-building', 16, 16, 1, 1);
-    this.cursors = this.input.keyboard.createCursorKeys();
 
     this.world = this.map.createLayer('world', this.tilesetWorld, 0, 0);
     this.building = this.map.createLayer('buildings', this.tilesetBuilding, 0, 0);
@@ -40,7 +39,6 @@ export default class GameScene extends Scene {
     this.rightKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.downKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-    this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     this.initialize();
   }
@@ -83,9 +81,6 @@ export default class GameScene extends Scene {
     }
     if (Phaser.Input.Keyboard.JustUp(this.downKey)){
       document.getElementById('game').dispatchEvent(new CustomEvent("cursor", {detail: {key: ORIENTATION.DOWN, input: KEY_STATUS.UP}}));
-    }
-    if(Phaser.Input.Keyboard.JustDown(this.spaceKey)){
-      document.getElementById('game').dispatchEvent(new CustomEvent("interaction"));
     }
   }
 }

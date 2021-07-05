@@ -19,7 +19,7 @@ class Berry extends Schema {
       type: type,
       name: BERRY_NAME[type],
       status: status,
-      dialog: this.descriptions[status],
+      description: this.descriptions[status],
       x: x,
       y: y,
       step: step
@@ -60,7 +60,7 @@ class Berry extends Schema {
   }
 
   changeDialog(){
-    this.dialog = this.descriptions[this.status];
+    this.description = this.descriptions[this.status];
   }
 }
 
@@ -69,7 +69,7 @@ schema.defineTypes(Berry, {
   name: 'string',
   type: 'string',
   status: 'string',
-  dialog: 'string',
+  description: 'string',
   x: 'uint8',
   y: 'uint8',
   step: 'int8',

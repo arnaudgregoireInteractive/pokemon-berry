@@ -141,11 +141,11 @@ class OnInteractionCommand extends Command{
     let desiredPosition = this.state.getDesiredPosition(player);
     let npc = this.state.checkNpc(desiredPosition);
     if(npc){
-      client.send('dialog',{nickName : npc.properties[0].value, speech: npc.properties[1].value});
+      client.send('dialog',{title : npc.properties[0].value, info: npc.properties[1].value});
     }
     let berry = this.state.checkBerry(desiredPosition);
     if(berry){
-      client.send('berry-interaction', {id: berry.id});
+      client.send('dialog',{title : '', info: berry.description});
     }
   }
 }

@@ -6,7 +6,7 @@ import { findDOMNode } from 'react-dom';
 
     componentDidUpdate(){
         if(this.props.messages.length != 0){
-            console.log(this.props.messages.length);
+            //console.log(this.props.messages.length);
             var domMessages = findDOMNode(this.refs.history);
             domMessages.scrollTop = domMessages.scrollHeight;
         }

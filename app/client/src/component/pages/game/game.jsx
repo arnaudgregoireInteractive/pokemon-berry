@@ -1,31 +1,29 @@
 import React from 'react';
 import GameContainer from '../../../game/game-container';
 import Chat from './chat/chat';
+import Inventory from './inventory/inventory';
 
 export default class Game extends React.Component {
   constructor() {
     super();
     this.container = React.createRef();
     this.game = new GameContainer(this);
+
+    this.state = {
+      currentText: "",
+      messages : [],
+      inventory: {},
+      inventoryVisible: true
+    };
   }
 
   componentDidMount(){
     document.getElementById('game').addEventListener('cursor', (this.handlePlayerInput.bind(this)));
-    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
-    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
-    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
-    document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
-    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
     document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
   }
 
   componentWillUnmount(){
     document.getElementById('game').removeEventListener('cursor', this.handlePlayerInput.bind(this));
-    document.getElementById('game').addEventListener('interaction', (this.handleInteractionInput.bind(this)));
-    document.getElementById('game').addEventListener('inventory', (this.showInventory.bind(this)));
-    document.getElementById('game').addEventListener('item', (this.handleItemInteraction.bind(this)));
-    document.getElementById('game').addEventListener('move-item', (this.handleItemMove.bind(this)));
-    document.getElementById('game').addEventListener('action', (this.handleAction.bind(this)));
     document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
   }
 
@@ -37,48 +35,76 @@ export default class Game extends React.Component {
     this.game.handlePlayerInput(e.detail);
   }
 
-  handleItemMove(e){
-    this.game.handleItemMove(e.detail);
-  }
-
-  showInventory(){
-    this.game.showInventory();
-  }
-
-  handleItemInteraction(e){
-    this.game.handleItemInteraction(e.detail);
-  }
-
-  handleAction(e){
-    this.game.handleAction(e.detail);
-  }
-
-  handleInteractionInput(e){
-    this.game.handleInteractionInput();
-  }
-
   sendMessage(newMessage){
     this.game.sendMessage(newMessage);
   }
   
+  handleItemInput(e){
+    e.preventDefault();
+    this.game.handleItemInput(e.target.id);
+  }
+
   handleSubmit (e) {
     e.preventDefault()
-    this.game.sendMessage(this.refs.chat.state.currentText);
-    this.refs.chat.setState({currentText: ""});
+    this.game.sendMessage(this.state.currentText);
+    this.setState({currentText: ""});
+  }
+
+  onInputChange (e) {
+    e.preventDefault();
+    this.setState({ currentText: e.target.value });
   }
 
   receiveMessage (message) {
     this.setState({messages :this.state.messages.concat({name: message.name, payload: message.payload})});
   }
 
+  onInventoryChange(i){
+    this.setState({inventory: i});
+  }
+
+  handleDialog(message){
+    console.log(message);
+  }
+
+  handleKeyPress(e){
+    switch (e.code) {
+      case "Space":
+        this.game.handleInteractionInput();
+        break;
+    
+      case "KeyI":
+        this.setState((state, props) =>{
+          return {
+            inventoryVisible: !state.inventoryVisible
+          };
+        });
+
+      default:
+        break;
+    }
+  }
+
+  focusTextInput() {
+    this.container.current.focus();  
+  }
+
   render() {
     return (
-      <div>
-        <main style={{display:'flex'}}>
-          <div id="game" ref={this.container}></div>
-          <Chat ref="chat" receiveMessage={this.receiveMessage} handleSubmit={this.handleSubmit.bind(this)}/>
-        </main>
-      </div>
+      <main style={{display:'flex'}}>
+        <div id="game" tabIndex="0" ref={this.container} onClick={this.focusTextInput.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}></div>
+        <Chat
+        handleSubmit={this.handleSubmit.bind(this)} 
+        onInputChange={this.onInputChange.bind(this)}
+        currentText={this.state.currentText}
+        messages={this.state.messages}
+        />
+        <Inventory
+        inventory={this.state.inventory}
+        visible={this.state.inventoryVisible}
+        handleItemInput={this.handleItemInput.bind(this)}
+        />
+      </main>
     );
   }
 }
