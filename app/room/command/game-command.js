@@ -201,7 +201,7 @@ class OnUpdateCommand extends Command {
       let split = link.properties[0].value.split('-');
       //console.log(split);
       let client = this.room.clients.find(c=>{return c.auth.uid == player.id});
-      await Utils.savePlayer(client, this.state);
+      //await Utils.savePlayer(client, this.state);
       client.send('link', {from: split[0], to : split[1]});
     }
     if(this.state.checkNpc(desiredPosition)){
