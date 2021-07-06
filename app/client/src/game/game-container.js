@@ -62,13 +62,13 @@ export default class GameContainer {
       this.room.state.berries.onAdd = (berry) => this.onBerryAdd(berry);
       this.room.state.berries.onRemove = (berry, key) => this.onBerryRemove(berry, key);
 
-      this.room.state.messages.onAdd = this.component.receiveMessage.bind(this.component);
+      this.room.state.messages.onAdd = this.component.appendMessage.bind(this.component);
       
       this.room.onMessage("link", (message) => {
         this.handleLink(message);
       });
       this.room.onMessage("prompt", (message) => {
-        this.component.receivePrompt(message);
+        this.component.setPrompt(message);
       });
     }
   }
@@ -108,14 +108,7 @@ export default class GameContainer {
     if (player.id == firebase.auth().currentUser.uid) {
       this.player = player;
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
-      this.player.inventory.slots.onRemove = (item, key) => this.component.onInventoryChange(this.player.inventory);
-      this.player.onChange = ((changes) => {
-        changes.forEach((change) => {
-          if(change.field == 'money' && this.game.scene.getScene('ui-scene')){
-            this.game.scene.getScene('ui-scene').handleMoneyChange(change.value);
-          }
-        });
-      });
+      this.player.inventory.slots.onRemove = (item, key) => this.component.setInventory(this.player.inventory);
     }
     player.onChange = ((changes) => {
       changes.forEach((change) => this.handlePlayerChange(change, player));
@@ -127,8 +120,8 @@ export default class GameContainer {
   onInventoryAdd(item){
     //console.log(item);
     //console.log(this.component);
-    item.onChange = this.component.onInventoryChange(this.player.inventory);
-    this.component.onInventoryChange(this.player.inventory);
+    item.onChange = this.component.setInventory(this.player.inventory);
+    this.component.setInventory(this.player.inventory);
   }
 
   onPlayerRemove(player, key){

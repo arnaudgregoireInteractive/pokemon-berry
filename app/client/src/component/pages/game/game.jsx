@@ -16,7 +16,7 @@ export default class Game extends React.Component {
       inventory: {},
       inventoryVisible: true,
       prompt:{},
-      promptVisible: true
+      promptVisible: false
     };
   }
 
@@ -32,10 +32,12 @@ export default class Game extends React.Component {
 
   startScenes(){
     this.game.startScenes();
+    this.focusGame();
   }
 
   handlePlayerInput(e){
     this.game.handlePlayerInput(e.detail);
+    this.setPromptVisible(false);
   }
 
   sendMessage(newMessage){
@@ -53,21 +55,30 @@ export default class Game extends React.Component {
     this.setState({currentText: ""});
   }
 
-  onInputChange (e) {
+  setCurrentText (e) {
     e.preventDefault();
     this.setState({ currentText: e.target.value });
   }
 
-  receiveMessage (message) {
+  appendMessage (message) {
     this.setState({messages :this.state.messages.concat({name: message.name, payload: message.payload})});
   }
 
-  onInventoryChange(i){
+  setInventory(i){
     this.setState({inventory: i});
   }
 
-  receivePrompt(p){
-    this.setState({prompt: p});
+  setPrompt(p){
+    this.setState((state, props) =>{
+        return {
+            prompt: p,
+            promptVisible: !state.promptVisible
+        };
+      });
+  }
+
+  setPromptVisible(visible){
+      this.setState({promptVisible: visible});
   }
 
   handleKeyPress(e){
@@ -82,23 +93,24 @@ export default class Game extends React.Component {
             inventoryVisible: !state.inventoryVisible
           };
         });
+        break;
 
       default:
         break;
     }
   }
 
-  focusTextInput() {
+  focusGame() {
     this.container.current.focus();  
   }
 
   render() {
     return (
       <main style={{display:'flex'}}>
-        <div id="game" tabIndex="0" ref={this.container} onClick={this.focusTextInput.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}></div>
+        <div id="game" tabIndex="0" ref={this.container} onClick={this.focusGame.bind(this)} onKeyPress={this.handleKeyPress.bind(this)}></div>
         <Chat
           handleSubmit={this.handleSubmit.bind(this)} 
-          onInputChange={this.onInputChange.bind(this)}
+          setCurrentText={this.setCurrentText.bind(this)}
           currentText={this.state.currentText}
           messages={this.state.messages}
         />
