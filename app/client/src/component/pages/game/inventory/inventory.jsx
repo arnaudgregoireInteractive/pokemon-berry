@@ -38,7 +38,7 @@ import Draggable from 'react-draggable';
             </Draggable>;
         }
         else{
-            return <div></div>;
+            return null;
         }
     }
  }

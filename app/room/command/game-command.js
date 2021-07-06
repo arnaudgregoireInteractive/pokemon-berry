@@ -30,7 +30,8 @@ class Utils{
             doc.name = save.name;
             doc.zone = save.zone;
             doc.money = save.money;
-            doc.save();
+            doc.save().catch(err=>{console.log(err)});
+
           }); 
         }
       }

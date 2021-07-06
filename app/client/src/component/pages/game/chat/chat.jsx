@@ -8,7 +8,7 @@ export default class Chat extends React.Component {
     super(props);
 
     this.handleSubmit = props.handleSubmit;
-    this.onInputChange = props.onInputChange;
+    this.setCurrentText = props.setCurrentText;
   }
 
   componentDidUpdate(){
@@ -43,7 +43,7 @@ export default class Chat extends React.Component {
             <ChatHistory messages={this.props.messages}/>
             <form style={formStyles} onSubmit={this.handleSubmit}>
               <div className="nes-field" style={{width: '80%'}}>
-                <input id="name_field" type="text" className="nes-input" onChange={this.onInputChange} value={this.props.currentText} />
+                <input id="name_field" type="text" className="nes-input" onChange={this.setCurrentText} value={this.props.currentText} />
               </div>
               
               <button className="nes-btn is-primary" style={{width: '20%', fontFamily:'Verdana', fontSize:'20px'}}>Send</button>

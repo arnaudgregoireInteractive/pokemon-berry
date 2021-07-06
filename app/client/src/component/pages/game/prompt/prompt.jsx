@@ -16,11 +16,11 @@ import React from 'react';
             position: 'absolute'
         };
 
-        if(this.props.prompt.title !== undefined){
+        if(this.props.prompt.title !== undefined && this.props.visible){
             return <div className= "nes-container is-rounded" style={promptStyle}><p>{this.props.prompt.title}</p> <p>{this.props.prompt.info}</p></div>
         }
         else{
-            return <div></div>;
+            return null;
         }
        
     }
