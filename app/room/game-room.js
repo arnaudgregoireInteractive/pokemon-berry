@@ -31,13 +31,6 @@ class GameRoom extends colyseus.Room {
       });
     });
 
-    this.onMessage("item-move",(client, message) =>{
-      this.dispatcher.dispatch(new OnItemMoveCommand(), {
-        client,
-        message
-      });
-    });
-
     this.onMessage("message",(client, message) =>{
       this.dispatcher.dispatch(new OnMessageCommand(), {
         client,

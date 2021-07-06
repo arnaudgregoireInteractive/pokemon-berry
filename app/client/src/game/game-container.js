@@ -118,9 +118,10 @@ export default class GameContainer {
   }
 
   onInventoryAdd(item){
-    //console.log(item);
-    //console.log(this.component);
-    item.onChange = this.component.setInventory(this.player.inventory);
+    
+    item.onChange = ()=>{
+      this.component.setInventory(this.player.inventory);
+    };
     this.component.setInventory(this.player.inventory);
   }
 
@@ -149,6 +150,10 @@ export default class GameContainer {
 
   handleInteractionInput(){
     this.room.send('interaction');
+  }
+
+  onAction(action){
+    this.room.send('action',{type:action});
   }
 
   handleItemInput(id){

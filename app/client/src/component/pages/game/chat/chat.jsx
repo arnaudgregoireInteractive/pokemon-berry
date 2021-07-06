@@ -25,7 +25,7 @@ export default class Chat extends React.Component {
       maxHeight: '150px',
       height: '150px',
       margin: '5px',
-      backgroundColor: 'rgba(255, 255, 255, .6)'
+      backgroundColor: 'rgba(255, 255, 255, .7)'
    };
    
 

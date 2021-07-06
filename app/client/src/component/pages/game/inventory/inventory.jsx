@@ -19,7 +19,7 @@ import Draggable from 'react-draggable';
             width: '270px',
             maxHeight: '400px',
             height: '400px',
-            backgroundColor: 'rgba(255, 255, 255, .6)',
+            backgroundColor: 'rgba(255, 255, 255, .7)',
             padding: '0px'
          };
 

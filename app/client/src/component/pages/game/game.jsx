@@ -44,6 +44,11 @@ export default class Game extends React.Component {
     this.game.sendMessage(newMessage);
   }
   
+  onAction(e){
+    e.preventDefault();
+    this.game.onAction(e.target.textContent);
+  }
+
   handleItemInput(e){
     e.preventDefault();
     this.game.handleItemInput(e.target.id);
@@ -122,6 +127,7 @@ export default class Game extends React.Component {
         <Prompt
           prompt={this.state.prompt}
           visible={this.state.promptVisible}
+          onAction={this.onAction.bind(this)}
         />
 
       </main>

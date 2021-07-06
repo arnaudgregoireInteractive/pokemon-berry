@@ -12,7 +12,7 @@ import ActionsList from './action-list';
             width: '400px',
             maxHeight: '200px',
             height: '200px',
-            backgroundColor: 'rgba(255, 255, 255, .6)',
+            backgroundColor: 'rgba(255, 255, 255, .7)',
             padding: '0px',
             position: 'absolute'
         };
@@ -21,7 +21,7 @@ import ActionsList from './action-list';
             return <div className= "nes-container is-rounded" style={promptStyle}>
                 <p>{this.props.prompt.title}</p>
                 <p>{this.props.prompt.info}</p>
-                <ActionsList actions={this.props.prompt.actions}/>
+                <ActionsList actions={this.props.prompt.actions} onAction={this.props.onAction}/>
             </div>
         }
         else{

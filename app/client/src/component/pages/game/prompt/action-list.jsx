@@ -3,13 +3,14 @@ import React from 'react';
  export default class ActionsList extends React.Component{
 
     createAction(action){
-        return <button className="nes-btn is-primary">{action}</button>
+        return <li key={action}><button className="nes-btn is-primary" onClick={this.props.onAction}>{action}</button></li>
     }
 
     render() {
         //console.log(this.props);
         const listStyle = {
-            display: 'flex'
+            display: 'flex',
+            listStyle: 'none'
         };
 
         if(this.props.actions && Array.isArray(this.props.actions)){
