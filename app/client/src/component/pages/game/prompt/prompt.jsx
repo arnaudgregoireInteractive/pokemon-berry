@@ -1,4 +1,5 @@
 import React from 'react';
+import ActionsList from './action-list';
 
  export default class Prompt extends React.Component{
 
@@ -17,7 +18,11 @@ import React from 'react';
         };
 
         if(this.props.prompt.title !== undefined && this.props.visible){
-            return <div className= "nes-container is-rounded" style={promptStyle}><p>{this.props.prompt.title}</p> <p>{this.props.prompt.info}</p></div>
+            return <div className= "nes-container is-rounded" style={promptStyle}>
+                <p>{this.props.prompt.title}</p>
+                <p>{this.props.prompt.info}</p>
+                <ActionsList actions={this.props.prompt.actions}/>
+            </div>
         }
         else{
             return null;

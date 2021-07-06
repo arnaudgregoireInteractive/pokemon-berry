@@ -46,7 +46,7 @@ export default class Chat extends React.Component {
                 <input id="name_field" type="text" className="nes-input" onChange={this.setCurrentText} value={this.props.currentText} />
               </div>
               
-              <button className="nes-btn is-primary" style={{width: '20%', fontFamily:'Verdana', fontSize:'20px'}}>Send</button>
+              <button className="nes-btn is-primary" style={{width: '20%'}}>Send</button>
             </form>
         </div>
       </Draggable>

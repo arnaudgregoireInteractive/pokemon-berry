@@ -1,7 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
 const PlayerModel = require('../../model/player');
-const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE, NPC_TYPE } = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE, NPC_TYPE, ITEM_ACTION } = require('../../shared/enum');
 const Zone = require('../../model/zone');
 const Berry = require('../schema/berry');
 const uniqid = require('uniqid');
@@ -141,11 +141,11 @@ class OnInteractionCommand extends Command{
     let desiredPosition = this.state.getDesiredPosition(player);
     let npc = this.state.checkNpc(desiredPosition);
     if(npc){
-      client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value});
+      client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: []});
     }
     let berry = this.state.checkBerry(desiredPosition);
     if(berry){
-      client.send('prompt',{title : '', info: berry.description});
+      client.send('prompt',{title : '', info: berry.description, actions: [ACTION_TYPE.HARVEST]});
     }
   }
 }
