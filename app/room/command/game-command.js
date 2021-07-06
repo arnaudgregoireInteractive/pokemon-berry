@@ -82,7 +82,6 @@ class OnJoinCommand extends Command {
           new Player(client.auth.uid, this.state.zone, client.auth.displayName, this.state.spawnPoint.x/TILESET_PIXEL, this.state.spawnPoint.y/TILESET_PIXEL, ORIENTATION.DOWN, STATUS.IDLE, 5, [{
             id: uniqid('berry-'),
             type: BERRY_TYPE.CHERI_BERRY,
-            index: 0,
             quantity: 2
           }]));
       }
@@ -244,28 +243,6 @@ class OnItemUseCommand extends Command{
   }
 }
 
-class OnItemMoveCommand extends Command{
-  execute({client, message}){
-    let player = this.state.players.get(client.auth.uid);
-    let item = player.inventory.slots.get(message.id);
-    let possibleItemOnWantedSlot = player.inventory.getSlotByIndex(message.index);
-    if(item){
-      if(possibleItemOnWantedSlot){
-        this.swap(item, possibleItemOnWantedSlot);
-      }
-      else{
-        item.index = message.index;
-      }
-    }
-  }
-
-  swap(item1, item2){
-    let temp = item1.index;
-    item1.index = item2.index;
-    item2.index = temp;
-  }
-}
-
 class OnDisposeCommand extends Command{
   execute(){
     let berries = [];
@@ -313,7 +290,6 @@ module.exports = {
   OnInteractionCommand: OnInteractionCommand,
   OnItemUseCommand: OnItemUseCommand,
   OnActionCommand: OnActionCommand,
-  OnItemMoveCommand: OnItemMoveCommand,
   OnDisposeCommand: OnDisposeCommand,
   OnLoadCommand: OnLoadCommand
 };

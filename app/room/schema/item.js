@@ -2,12 +2,11 @@ const schema = require('@colyseus/schema');
 const Schema = schema.Schema;
 
 class Item extends Schema {
-  constructor(id, type, index) {
+  constructor(id, type) {
     super();
     this.assign({
       id:id,
       type: type,
-      index: index,
       stackable: false
     });
   }
@@ -20,7 +19,6 @@ class Item extends Schema {
 schema.defineTypes(Item, {
   type: 'string',
   id: 'string',
-  index: 'uint8',
   stackable: 'boolean'
 });
 

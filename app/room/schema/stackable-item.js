@@ -2,8 +2,8 @@ const schema = require('@colyseus/schema');
 const Item = require('./item');
 
 class StackableItem extends Item {
-  constructor(id, type, index, quantity) {
-    super(id, type, index);
+  constructor(id, type, quantity) {
+    super(id, type);
     this.assign({
         quantity: quantity,
         stackable: true

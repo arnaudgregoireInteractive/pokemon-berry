@@ -8,9 +8,6 @@ const Item = new Schema(
       type: {
         type: String
       },
-      index: {
-        type: Number
-      },
       quantity: {
         type: Number
       }

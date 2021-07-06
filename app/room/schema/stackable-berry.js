@@ -5,8 +5,8 @@ const uniqid = require('uniqid');
 const { BERRY_STATUS } = require('../../shared/enum');
 
 class StackableBerry extends StackableItem {
-  constructor(id, type, index, quantity) {
-    super(id, type, index, quantity);
+  constructor(id, type, quantity) {
+    super(id, type, quantity);
   }
 
     use(player, desiredPosition, state){

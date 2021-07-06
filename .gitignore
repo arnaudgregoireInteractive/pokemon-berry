@@ -1,6 +1,6 @@
 node_modules
 *.env
-app/public/dist/**/*.js
+app/client/dist/**/*.js
 *.code-workspace
 db-commands/
 /firebase.json
