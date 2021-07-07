@@ -14,10 +14,11 @@ import React from 'react';
         }
 
         const quantity = this.props.quantity ? `${this.props.quantity}x` : ``;
+        const price = this.props.price ? `${this.props.price}$`: ``;
 
         return <div style={itemStyle}>
             <img style={imgStyle} src={imgSrc}/>
-            <p id={this.props.itemId} onClick={this.props.handleItem} className="nes-pointer">{quantity} {this.props.type}</p>
+            <p id={this.props.itemId} onClick={this.props.handleItem} className="nes-pointer">{quantity} {this.props.type} {price}</p>
         </div>;
      }
  }

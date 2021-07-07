@@ -141,11 +141,25 @@ class OnInteractionCommand extends Command{
     let desiredPosition = this.state.getDesiredPosition(player);
     let npc = this.state.checkNpc(desiredPosition);
     if(npc){
-      client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: []});
+        switch (npc.type) {
+            case NPC_TYPE.DIALOG:
+                client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: []});
+                break;
+        
+            case NPC_TYPE.SELL:
+                client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: [ACTION_TYPE.SELL]});
+                break;
+
+            default:
+                break;
+        }
+
     }
-    let berry = this.state.checkBerry(desiredPosition);
-    if(berry){
-      client.send('prompt',{title : '', info: berry.description, actions: [ACTION_TYPE.HARVEST]});
+    else{
+        let berry = this.state.checkBerry(desiredPosition);
+        if(berry){
+          client.send('prompt',{title : '', info: berry.description, actions: [ACTION_TYPE.HARVEST]});
+        }
     }
   }
 }

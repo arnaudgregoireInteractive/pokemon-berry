@@ -55,6 +55,9 @@ export default class Game extends React.Component {
             this.game.handleAction(action);
             break;
     
+        case ACTION_TYPE.SELL:
+            this.setState({sellVisible: true});
+            
         default:
             break;
     }

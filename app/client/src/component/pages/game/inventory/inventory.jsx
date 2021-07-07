@@ -15,9 +15,7 @@ import Draggable from 'react-draggable';
             position:'absolute',
             top:'20px',
             right:'20px',
-            maxWidth: '270px',
             width: '270px',
-            maxHeight: '400px',
             height: '400px',
             backgroundColor: 'rgba(255, 255, 255, .7)',
             padding: '0px'
