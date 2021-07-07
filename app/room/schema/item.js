@@ -1,4 +1,5 @@
 const schema = require('@colyseus/schema');
+const { ITEM_PRICE } = require('../../shared/enum');
 const Schema = schema.Schema;
 
 class Item extends Schema {
@@ -7,7 +8,8 @@ class Item extends Schema {
     this.assign({
       id:id,
       type: type,
-      stackable: false
+      stackable: false,
+      price: ITEM_PRICE[type]
     });
   }
 
@@ -19,7 +21,8 @@ class Item extends Schema {
 schema.defineTypes(Item, {
   type: 'string',
   id: 'string',
-  stackable: 'boolean'
+  stackable: 'boolean',
+  price: 'uint16'
 });
 
 module.exports = Item;
