@@ -1,7 +1,7 @@
 const colyseus = require("colyseus");
 const command = require("@colyseus/command");
 const GameState = require('./state/game-state');
-const {OnDisposeCommand, OnItemMoveCommand, OnActionCommand, OnItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand, OnLoadCommand} = require("./command/game-command");
+const {OnDisposeCommand, handleItemMoveCommand, OnActionCommand, handleItemUseCommand, OnJoinCommand, OnLeaveCommand, OnCursorCommand, OnUpdateCommand, OnMessageCommand, OnInteractionCommand, OnLoadCommand} = require("./command/game-command");
 const admin = require('firebase-admin');
 
 class GameRoom extends colyseus.Room {
@@ -25,7 +25,7 @@ class GameRoom extends colyseus.Room {
     });
 
     this.onMessage("item-use",(client, message) =>{
-      this.dispatcher.dispatch(new OnItemUseCommand(), {
+      this.dispatcher.dispatch(new handleItemUseCommand(), {
         client,
         message
       });

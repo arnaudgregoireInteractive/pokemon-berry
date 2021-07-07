@@ -7,7 +7,7 @@ import Draggable from 'react-draggable';
     createItem(keyValue){
         const k = keyValue[0];
         const v = keyValue[1];
-        return <li key={k}><Item type={v.type} quantity={v.quantity} itemId={v.id} handleItemInput={this.props.handleItemInput}/></li>;
+        return <li key={k}><Item handleItem={this.props.handleItem} type={v.type} quantity={v.quantity} itemId={v.id}/></li>;
     }
 
     render() {

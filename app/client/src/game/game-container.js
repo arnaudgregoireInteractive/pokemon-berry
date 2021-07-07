@@ -144,7 +144,7 @@ export default class GameContainer {
     }
   }
 
-  handlePlayerInput(message){
+  handleCursor(message){
     this.room.send('cursor', message);
   }
 
@@ -152,11 +152,11 @@ export default class GameContainer {
     this.room.send('interaction');
   }
 
-  onAction(action){
+  handleAction(action){
     this.room.send('action',{type:action});
   }
 
-  handleItemInput(id){
+  handleItem(id){
     this.room.send('item-use', {'id': id});
   }
 

@@ -6,13 +6,6 @@ import "nes.css/css/nes.min.css";
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleSubmit = props.handleSubmit;
-    this.setCurrentText = props.setCurrentText;
-  }
-
-  componentDidUpdate(){
-    
   }
 
   render() {
@@ -41,9 +34,9 @@ export default class Chat extends React.Component {
       <Draggable>
         <div style={windowStyles}>
             <ChatHistory messages={this.props.messages}/>
-            <form style={formStyles} onSubmit={this.handleSubmit}>
+            <form style={formStyles} onSubmit={this.props.handleSubmit}>
               <div className="nes-field" style={{width: '80%'}}>
-                <input id="name_field" type="text" className="nes-input" onChange={this.setCurrentText} value={this.props.currentText} />
+                <input id="name_field" type="text" className="nes-input" onChange={this.props.setCurrentText} value={this.props.currentText} />
               </div>
               
               <button className="nes-btn is-primary" style={{width: '20%'}}>Send</button>

@@ -232,7 +232,7 @@ class OnUpdateCommand extends Command {
   }
 }
 
-class OnItemUseCommand extends Command{
+class handleItemUseCommand extends Command{
   execute({client, message}){
     let player = this.state.players.get(client.auth.uid);
     let desiredPosition = this.state.getDesiredPosition(player);
@@ -288,7 +288,7 @@ module.exports = {
   OnCursorCommand: OnCursorCommand,
   OnMessageCommand: OnMessageCommand,
   OnInteractionCommand: OnInteractionCommand,
-  OnItemUseCommand: OnItemUseCommand,
+  handleItemUseCommand: handleItemUseCommand,
   OnActionCommand: OnActionCommand,
   OnDisposeCommand: OnDisposeCommand,
   OnLoadCommand: OnLoadCommand

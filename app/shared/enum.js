@@ -10,7 +10,9 @@ const ZONES = Object.freeze({
 const TILESET_PIXEL = 16;
 
 const ACTION_TYPE = Object.freeze({
-    HARVEST: 'HARVEST'
+    HARVEST: 'HARVEST',
+    SELL: 'SELL'
+
 });
 
 const ORIENTATION = Object.freeze({

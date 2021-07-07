@@ -17,7 +17,7 @@ import React from 'react';
 
         return <div style={itemStyle}>
             <img style={imgStyle} src={imgSrc}/>
-            <p id={this.props.itemId} onClick={this.props.handleItemInput} className="nes-pointer">{quantity} {this.props.type}</p>
+            <p id={this.props.itemId} onClick={this.props.handleItem} className="nes-pointer">{quantity} {this.props.type}</p>
         </div>;
      }
  }

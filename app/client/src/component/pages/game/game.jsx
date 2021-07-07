@@ -3,6 +3,8 @@ import GameContainer from '../../../game/game-container';
 import Chat from './chat/chat';
 import Inventory from './inventory/inventory';
 import Prompt from './prompt/prompt';
+import Sell from './sell/sell';
+import { ACTION_TYPE } from '../../../../../shared/enum';
 
 export default class Game extends React.Component {
   constructor() {
@@ -16,17 +18,18 @@ export default class Game extends React.Component {
       inventory: {},
       inventoryVisible: true,
       prompt:{},
-      promptVisible: false
+      promptVisible: false,
+      sellVisible: false
     };
   }
 
   componentDidMount(){
-    document.getElementById('game').addEventListener('cursor', (this.handlePlayerInput.bind(this)));
+    document.getElementById('game').addEventListener('cursor', (this.handleCursor.bind(this)));
     document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
   }
 
   componentWillUnmount(){
-    document.getElementById('game').removeEventListener('cursor', this.handlePlayerInput.bind(this));
+    document.getElementById('game').removeEventListener('cursor', this.handleCursor.bind(this));
     document.getElementById('game').addEventListener('start-scenes', (this.startScenes.bind(this)));
   }
 
@@ -35,8 +38,8 @@ export default class Game extends React.Component {
     this.focusGame();
   }
 
-  handlePlayerInput(e){
-    this.game.handlePlayerInput(e.detail);
+  handleCursor(e){
+    this.game.handleCursor(e.detail);
     this.setPromptVisible(false);
   }
 
@@ -44,14 +47,28 @@ export default class Game extends React.Component {
     this.game.sendMessage(newMessage);
   }
   
-  onAction(e){
+  handleAction(e){
     e.preventDefault();
-    this.game.onAction(e.target.textContent);
+    const action = e.target.textContent;
+    switch (action) {
+        case ACTION_TYPE.HARVEST:
+            this.game.handleAction(action);
+            break;
+    
+        default:
+            break;
+    }
+
   }
 
-  handleItemInput(e){
+  handleItem(e){
     e.preventDefault();
-    this.game.handleItemInput(e.target.id);
+    this.game.handleItem(e.target.id);
+  }
+
+  handleSellItem(e){
+      e.preventDefault();
+      console.log(e);
   }
 
   handleSubmit (e) {
@@ -122,14 +139,18 @@ export default class Game extends React.Component {
         <Inventory
           inventory={this.state.inventory}
           visible={this.state.inventoryVisible}
-          handleItemInput={this.handleItemInput.bind(this)}
+          handleItem={this.handleItem.bind(this)}
         />
         <Prompt
           prompt={this.state.prompt}
           visible={this.state.promptVisible}
-          onAction={this.onAction.bind(this)}
+          handleAction={this.handleAction.bind(this)}
         />
-
+        <Sell
+          visible={this.state.sellVisible}
+          inventory={this.state.inventory}
+          handleItem={this.handleSellItem.bind(this)}
+        />
       </main>
     );
   }
