@@ -41,6 +41,7 @@ export default class Game extends React.Component {
   handleCursor(e){
     this.game.handleCursor(e.detail);
     this.setPromptVisible(false);
+    this.setState({sellVisible: true});
   }
 
   sendMessage(newMessage){
@@ -50,6 +51,7 @@ export default class Game extends React.Component {
   handleAction(e){
     e.preventDefault();
     const action = e.target.textContent;
+    this.setPromptVisible(false);
     switch (action) {
         case ACTION_TYPE.HARVEST:
             this.game.handleAction(action);

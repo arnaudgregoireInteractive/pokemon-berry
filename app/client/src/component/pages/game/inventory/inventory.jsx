@@ -1,5 +1,5 @@
 import React from 'react';
-import Item from './item';
+import Item from '../common/item';
 import Draggable from 'react-draggable';
 
  export default class Inventory extends React.Component{
