@@ -9,8 +9,8 @@ import Money from '../common/money';
         const k = keyValue[0];
         const v = keyValue[1];
         
-        return <tr>
-            <td><Item type={v.type} quantity={v.quantity} itemId={v.id} handleItem={this.props.handleItem}/></td>
+        return <tr key={v.id} datakey={v.id} onClick={this.props.handleItem}>
+            <td><Item type={v.type} quantity={v.quantity}/></td>
             <td><Money money={v.price}/></td>
         </tr>
     }
@@ -18,15 +18,24 @@ import Money from '../common/money';
     render() {
         //console.log(this.props);
         const tableStyle = {
-            backgroundColor: 'rgba(255, 255, 255, .7)'
+            backgroundColor: 'rgba(255, 255, 255, .7)',
+            marginBottom: '10px'
         };
 
         const sellStyle = {
-            position:'absolute',
-            top:'20px',
-            left:'20px',
+            position: 'absolute',
+            top:'50%',
+            left:'50%',
+            marginTop:'-100px',
+            marginLeft:'-200px',
+            width: '400px',
+            height: '200px',
             backgroundColor: 'rgba(255, 255, 255, .7)',
-            padding: '0px'
+            padding: '0px',
+            display: 'flex',
+            justifyContent: 'center',
+            flexFlow: 'column',
+            alignItems: 'center'
          };
 
         if(this.props.visible && this.props.inventory && this.props.inventory.slots){
@@ -43,6 +52,7 @@ import Money from '../common/money';
                             {Array.from(this.props.inventory.slots).map(this.createItem.bind(this))}
                         </tbody>
                     </table>
+                    <button className="nes-btn is-error" style={{width: 'min-content'}} onClick={this.props.hideSell}>Close</button>
                 </div>
             </Draggable> 
         }

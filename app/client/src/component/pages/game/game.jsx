@@ -16,6 +16,7 @@ export default class Game extends React.Component {
       currentText: "",
       messages : [],
       inventory: {},
+      money:0,
       inventoryVisible: true,
       prompt:{},
       promptVisible: false,
@@ -40,8 +41,10 @@ export default class Game extends React.Component {
 
   handleCursor(e){
     this.game.handleCursor(e.detail);
-    this.setPromptVisible(false);
-    this.setState({sellVisible: true});
+    this.setState({
+      promptVisible:false,
+      sellVisible: false
+    });
   }
 
   sendMessage(newMessage){
@@ -51,7 +54,7 @@ export default class Game extends React.Component {
   handleAction(e){
     e.preventDefault();
     const action = e.target.textContent;
-    this.setPromptVisible(false);
+    this.setState({promptVisible: false});
     switch (action) {
         case ACTION_TYPE.HARVEST:
             this.game.handleAction(action);
@@ -68,12 +71,12 @@ export default class Game extends React.Component {
 
   handleItem(e){
     e.preventDefault();
-    this.game.handleItem(e.target.id);
+    this.game.handleItem(e.currentTarget.attributes.datakey.value);
   }
 
   handleSellItem(e){
-      e.preventDefault();
-      console.log(e);
+    e.preventDefault();
+    this.game.handleSellItem(e.currentTarget.attributes.datakey.value);
   }
 
   handleSubmit (e) {
@@ -95,6 +98,10 @@ export default class Game extends React.Component {
     this.setState({inventory: i});
   }
 
+  setMoney(m){
+    this.setState({money: m});
+  }
+
   setPrompt(p){
     this.setState((state, props) =>{
         return {
@@ -104,8 +111,10 @@ export default class Game extends React.Component {
       });
   }
 
-  setPromptVisible(visible){
-      this.setState({promptVisible: visible});
+  hideSell(){
+    this.setState({
+      sellVisible: false
+    });
   }
 
   handleKeyPress(e){
@@ -144,6 +153,7 @@ export default class Game extends React.Component {
         <Inventory
           inventory={this.state.inventory}
           visible={this.state.inventoryVisible}
+          money={this.state.money}
           handleItem={this.handleItem.bind(this)}
         />
         <Prompt
@@ -154,6 +164,7 @@ export default class Game extends React.Component {
         <Sell
           visible={this.state.sellVisible}
           inventory={this.state.inventory}
+          hideSell={this.hideSell.bind(this)}
           handleItem={this.handleSellItem.bind(this)}
         />
       </main>

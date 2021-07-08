@@ -54,7 +54,7 @@ class Auth extends Component {
     if (!this.state.isSignedIn) {
         return (
             <div>
-            <h1>My App</h1>
+            <h1>Pokemon Berry</h1>
             <p>Please sign-in:</p>
             <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
           </div>
@@ -63,9 +63,9 @@ class Auth extends Component {
     else{
         return(
             <div>
-            <h1>My App</h1>
+            <h1>Pokemon Berry</h1>
             <Link to={'./game'}>
-                <button variant="raised">
+                <button className="nes-btn is-success">
                     Game
                 </button>
             </Link>

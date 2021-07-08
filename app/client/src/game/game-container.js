@@ -107,6 +107,7 @@ export default class GameContainer {
   onPlayerAdd(player){
     if (player.id == firebase.auth().currentUser.uid) {
       this.player = player;
+      this.component.setMoney(this.player.money);
       this.player.inventory.slots.onAdd = (item) => this.onInventoryAdd(item);
       this.player.inventory.slots.onRemove = (item, key) => this.component.setInventory(this.player.inventory);
     }
@@ -133,6 +134,10 @@ export default class GameContainer {
 
   handlePlayerChange(change, player){
     //console.log(change);
+    if(this.player && this.player.id == player.id && change.field == 'money'){
+      this.component.setMoney(change.value);
+    }
+
     if(this.game && this.game.scene && this.game.scene.getScene('game-scene') && this.game.scene.getScene('game-scene').playerManager){
       this.game.scene.getScene('game-scene').playerManager.handlePlayerChange(player, change);
     }
@@ -158,6 +163,10 @@ export default class GameContainer {
 
   handleItem(id){
     this.room.send('item-use', {'id': id});
+  }
+
+  handleSellItem(id){
+    this.room.send('item-sell', {'id': id});
   }
 
   sendMessage(message){

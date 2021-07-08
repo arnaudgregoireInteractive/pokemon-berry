@@ -9,7 +9,7 @@ class Home extends Component {
       <h1>Home</h1>
       {/* Link to List.js */}
       <Link to={'./auth'}>
-        <button variant="raised">
+        <button className="nes-btn is-primary">
             Play
         </button>
       </Link>

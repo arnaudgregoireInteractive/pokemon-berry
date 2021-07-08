@@ -246,12 +246,23 @@ class OnUpdateCommand extends Command {
   }
 }
 
-class handleItemUseCommand extends Command{
+class OnItemUseCommand extends Command{
   execute({client, message}){
     let player = this.state.players.get(client.auth.uid);
     let desiredPosition = this.state.getDesiredPosition(player);
     let item = player.inventory.slots.get(message.id);
     if(item && item.use(player, desiredPosition, this.state)){
+      player.inventory.removeItem(item);
+    }
+  }
+}
+
+class OnItemSellCommand extends Command{
+  execute({client, message}){
+    let player = this.state.players.get(client.auth.uid);
+    let item = player.inventory.slots.get(message.id);
+    if(item){
+      player.money += item.price;
       player.inventory.removeItem(item);
     }
   }
@@ -302,8 +313,9 @@ module.exports = {
   OnCursorCommand: OnCursorCommand,
   OnMessageCommand: OnMessageCommand,
   OnInteractionCommand: OnInteractionCommand,
-  handleItemUseCommand: handleItemUseCommand,
+  OnItemUseCommand: OnItemUseCommand,
   OnActionCommand: OnActionCommand,
   OnDisposeCommand: OnDisposeCommand,
-  OnLoadCommand: OnLoadCommand
+  OnLoadCommand: OnLoadCommand,
+  OnItemSellCommand: OnItemSellCommand
 };

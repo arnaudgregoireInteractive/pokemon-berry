@@ -6,11 +6,11 @@ import ActionsList from './action-list';
     render() {
         //console.log(this.props);
         const promptStyle = {
-            top:'40%',
-            right:'40%',
-            maxWidth: '400px',
+            top:'50%',
+            left:'50%',
+            marginTop:'-100px',
+            marginLeft:'-200px',
             width: '400px',
-            maxHeight: '200px',
             height: '200px',
             backgroundColor: 'rgba(255, 255, 255, .7)',
             padding: '0px',

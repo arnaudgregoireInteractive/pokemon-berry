@@ -100,7 +100,7 @@
                         {
                          "name":"speech",
                          "type":"string",
-                         "value":"Do you have any berries? I'll buy them from you for money!ood money"
+                         "value":"Do you have any berries? I'll buy them from you for money!"
                         }],
                  "rotation":0,
                  "type":"SELL",
