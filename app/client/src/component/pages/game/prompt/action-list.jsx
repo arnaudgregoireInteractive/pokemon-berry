@@ -11,7 +11,9 @@ import React from 'react';
         const listStyle = {
             display: 'flex',
             listStyle: 'none',
-            padding: '0px'
+            padding: '0px',
+            justifyContent: 'space-around',
+            width:'100%'
         };
 
         if(this.props.actions && Array.isArray(this.props.actions)){

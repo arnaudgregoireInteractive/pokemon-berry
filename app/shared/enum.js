@@ -11,7 +11,8 @@ const TILESET_PIXEL = 16;
 
 const ACTION_TYPE = Object.freeze({
     HARVEST: 'HARVEST',
-    SELL: 'SELL'
+    SELL: 'SELL',
+    BUY: 'BUY'
 
 });
 

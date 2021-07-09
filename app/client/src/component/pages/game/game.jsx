@@ -4,6 +4,7 @@ import Chat from './chat/chat';
 import Inventory from './inventory/inventory';
 import Prompt from './prompt/prompt';
 import Sell from './sell/sell';
+import Buy from './buy/buy';
 import { ACTION_TYPE } from '../../../../../shared/enum';
 
 export default class Game extends React.Component {
@@ -16,11 +17,12 @@ export default class Game extends React.Component {
       currentText: "",
       messages : [],
       inventory: {},
+      prompt:{},
       money:0,
       inventoryVisible: true,
-      prompt:{},
       promptVisible: false,
-      sellVisible: false
+      sellVisible: false,
+      buyVisible: false
     };
   }
 
@@ -43,7 +45,8 @@ export default class Game extends React.Component {
     this.game.handleCursor(e.detail);
     this.setState({
       promptVisible:false,
-      sellVisible: false
+      sellVisible: false,
+      buyVisible: false
     });
   }
 
@@ -57,11 +60,16 @@ export default class Game extends React.Component {
     this.setState({promptVisible: false});
     switch (action) {
         case ACTION_TYPE.HARVEST:
-            this.game.handleAction(action);
-            break;
+          this.game.handleAction(action);
+          break;
     
         case ACTION_TYPE.SELL:
-            this.setState({sellVisible: true});
+          this.setState({sellVisible: true});
+          break;
+
+        case ACTION_TYPE.BUY:
+          this.setState({buyVisible: true});
+          break;
             
         default:
             break;
@@ -77,6 +85,11 @@ export default class Game extends React.Component {
   handleSellItem(e){
     e.preventDefault();
     this.game.handleSellItem(e.currentTarget.attributes.datakey.value);
+  }
+
+  handleBuyItem(e){
+    e.preventDefault();
+    this.game.handleBuyItem(e.currentTarget.attributes.datakey.value);
   }
 
   handleSubmit (e) {
@@ -114,6 +127,12 @@ export default class Game extends React.Component {
   hideSell(){
     this.setState({
       sellVisible: false
+    });
+  }
+
+  hideBuy(){
+    this.setState({
+      buyVisible: false
     });
   }
 
@@ -164,8 +183,13 @@ export default class Game extends React.Component {
         <Sell
           visible={this.state.sellVisible}
           inventory={this.state.inventory}
-          hideSell={this.hideSell.bind(this)}
+          hide={this.hideSell.bind(this)}
           handleItem={this.handleSellItem.bind(this)}
+        />
+        <Buy
+          visible={this.state.buyVisible}
+          hide={this.hideBuy.bind(this)}
+          handleItem={this.handleBuyItem.bind(this)}
         />
       </main>
     );

@@ -169,6 +169,10 @@ export default class GameContainer {
     this.room.send('item-sell', {'id': id});
   }
 
+  handleBuyItem(type){
+    this.room.send('item-buy',{'type': type});
+  }
+
   sendMessage(message){
     this.room.send('message', {payload : message});
   }

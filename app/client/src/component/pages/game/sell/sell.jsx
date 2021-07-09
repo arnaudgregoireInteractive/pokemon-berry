@@ -28,8 +28,6 @@ import Money from '../common/money';
             left:'50%',
             marginTop:'-100px',
             marginLeft:'-200px',
-            width: '400px',
-            height: '200px',
             backgroundColor: 'rgba(255, 255, 255, .7)',
             padding: '0px',
             display: 'flex',
@@ -52,7 +50,7 @@ import Money from '../common/money';
                             {Array.from(this.props.inventory.slots).map(this.createItem.bind(this))}
                         </tbody>
                     </table>
-                    <button className="nes-btn is-error" style={{width: 'min-content'}} onClick={this.props.hideSell}>Close</button>
+                    <button className="nes-btn is-error" style={{width: 'min-content'}} onClick={this.props.hide}>Close</button>
                 </div>
             </Draggable> 
         }

@@ -1,7 +1,7 @@
 const Command = require('@colyseus/command').Command;
 const Player = require('../schema/player');
 const PlayerModel = require('../../model/player');
-const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE, NPC_TYPE, ITEM_ACTION } = require('../../shared/enum');
+const {ORIENTATION, STATUS, KEY_STATUS, ACTION_TYPE, BERRY_STATUS, TILESET_PIXEL, BERRY_TYPE, NPC_TYPE, ITEM_ACTION, ITEM_PRICE } = require('../../shared/enum');
 const Zone = require('../../model/zone');
 const Berry = require('../schema/berry');
 const uniqid = require('uniqid');
@@ -147,7 +147,7 @@ class OnInteractionCommand extends Command{
                 break;
         
             case NPC_TYPE.SELL:
-                client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: [ACTION_TYPE.SELL]});
+                client.send('prompt',{title : npc.properties[0].value, info: npc.properties[1].value, actions: [ACTION_TYPE.SELL, ACTION_TYPE.BUY]});
                 break;
 
             default:
@@ -268,6 +268,19 @@ class OnItemSellCommand extends Command{
   }
 }
 
+class OnItemBuyCommand extends Command{
+  execute({client, message}){
+    let player = this.state.players.get(client.auth.uid);
+    let price = ITEM_PRICE[message.type] * 2;
+    //console.log(price);
+    if(price && player.money - price >= 0){
+      player.money -= price;
+      player.inventory.addItem(message.type, true);
+    }
+  }
+}
+
+
 class OnDisposeCommand extends Command{
   execute(){
     let berries = [];
@@ -317,5 +330,6 @@ module.exports = {
   OnActionCommand: OnActionCommand,
   OnDisposeCommand: OnDisposeCommand,
   OnLoadCommand: OnLoadCommand,
-  OnItemSellCommand: OnItemSellCommand
+  OnItemSellCommand: OnItemSellCommand,
+  OnItemBuyCommand: OnItemBuyCommand
 };
